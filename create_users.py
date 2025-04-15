@@ -1,32 +1,43 @@
+#!/usr/bin/env python
 import os
 import django
-from django.contrib.auth import get_user_model
-from django.core.management import call_command
+import sys
+from django.db.utils import IntegrityError
+from django.utils import timezone
 
 # Set up Django environment
-os.environ.setdefault("DJANGO_SETTINGS_MODULE", "wagtail_app.settings")
-django.setup()
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'wagtail_app.settings')
 
+try:
+    django.setup()
+except Exception as e:
+    print(f"Error setting up Django environment: {e}")
+    sys.exit(1)
+
+from django.contrib.auth import get_user_model
 User = get_user_model()
 
 def create_superuser():
-    if not User.objects.filter(username='admin').exists():
-        User.objects.create_superuser(
-            username='admin',
-            email='admin@example.com',
-            password='adminpassword',
+    try:
+        admin_user = User.objects.create_superuser(
+            username='luphonix_prime_admin',
+            email='Luphonix.prime@gmail.com',
+            password='keval_dhyey#2025',
             first_name='Admin',
-            last_name='User'
+            last_name='User',
+            last_login=timezone.now(),
         )
-        print("Superuser 'admin' created successfully!")
-    else:
-        print("Superuser 'admin' already exists!")
+        print("Superuser 'luphonix_prime_admin' created successfully!")
+    except IntegrityError:
+        print("Superuser 'luphonix_prime_admin' already exists!")
+    except Exception as e:
+        print(f"Error creating superuser: {e}")
 
 def create_staff_users():
     staff_users = [
         {
             'username': 'editor',
-            'email': 'editor@example.com',
+            'email': 'editor@luphonix.com',
             'password': 'editorpassword',
             'first_name': 'Editor',
             'last_name': 'User',
@@ -34,7 +45,7 @@ def create_staff_users():
         },
         {
             'username': 'moderator',
-            'email': 'moderator@example.com',
+            'email': 'moderator@luphonix.com',
             'password': 'moderatorpassword',
             'first_name': 'Moderator',
             'last_name': 'User',
@@ -43,25 +54,32 @@ def create_staff_users():
     ]
 
     for user_data in staff_users:
-        username = user_data.pop('username')
-        if not User.objects.filter(username=username).exists():
-            user = User.objects.create_user(username=username, **user_data)
-            print(f"Staff user '{username}' created successfully!")
-        else:
-            print(f"Staff user '{username}' already exists!")
+        try:
+            username = user_data.pop('username')
+            if not User.objects.filter(username=username).exists():
+                user = User.objects.create_user(
+                    username=username,
+                    last_login=timezone.now(),
+                    **user_data
+                )
+                print(f"Staff user '{username}' created successfully!")
+            else:
+                print(f"Staff user '{username}' already exists!")
+        except Exception as e:
+            print(f"Error creating staff user '{username}': {e}")
 
 def create_regular_users():
     regular_users = [
         {
             'username': 'user1',
-            'email': 'user1@example.com',
+            'email': 'user1@luphonix.com',
             'password': 'user1password',
             'first_name': 'Regular',
             'last_name': 'User1'
         },
         {
             'username': 'user2',
-            'email': 'user2@example.com',
+            'email': 'user2@luphonix.com',
             'password': 'user2password',
             'first_name': 'Regular',
             'last_name': 'User2'
@@ -69,16 +87,27 @@ def create_regular_users():
     ]
 
     for user_data in regular_users:
-        username = user_data.pop('username')
-        if not User.objects.filter(username=username).exists():
-            user = User.objects.create_user(username=username, **user_data)
-            print(f"Regular user '{username}' created successfully!")
-        else:
-            print(f"Regular user '{username}' already exists!")
+        try:
+            username = user_data.pop('username')
+            if not User.objects.filter(username=username).exists():
+                user = User.objects.create_user(
+                    username=username,
+                    last_login=timezone.now(),
+                    **user_data
+                )
+                print(f"Regular user '{username}' created successfully!")
+            else:
+                print(f"Regular user '{username}' already exists!")
+        except Exception as e:
+            print(f"Error creating regular user '{username}': {e}")
 
 if __name__ == '__main__':
-    print("Creating users...")
-    create_superuser()
-    create_staff_users()
-    create_regular_users()
-    print("User creation completed!")
+    print("Starting user creation process...")
+    try:
+        create_superuser()
+        create_staff_users()
+        create_regular_users()
+        print("User creation process completed successfully!")
+    except Exception as e:
+        print(f"An unexpected error occurred: {e}")
+        sys.exit(1)
