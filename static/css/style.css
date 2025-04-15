@@ -1525,3 +1525,105 @@ figcaption {
     font-size: 2rem;
   }
 }
+/* Header Responsive Styles */
+@media (max-width: 768px) {
+  .header-container {
+      padding: 15px;
+  }
+
+  .mobile-menu-toggle {
+      display: block;
+  }
+
+  nav ul {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      width: 100%;
+      background: #fff;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      padding: 20px;
+  }
+
+  nav ul.active {
+      display: block;
+  }
+
+  nav ul li {
+      display: block;
+      margin: 10px 0;
+  }
+}
+
+/* General Responsive Styles */
+@media (max-width: 768px) {
+  .container {
+      padding: 0 15px;
+  }
+
+  .row {
+      margin: 0 -15px;
+  }
+
+  .col-lg-6 {
+      padding: 0 15px;
+  }
+
+  /* Service Cards */
+  .service-detail {
+      padding: 30px 0;
+  }
+
+  .service-content {
+      text-align: center;
+  }
+
+  .feature-item {
+      margin-bottom: 20px;
+  }
+
+  /* Contact Section */
+  .contact-card {
+      margin-bottom: 20px;
+  }
+
+  .contact-form-container {
+      padding: 20px;
+  }
+
+  /* Testimonials */
+  .testimonial {
+      padding: 15px;
+  }
+
+  /* FAQ Section */
+  .faq-item {
+      margin-bottom: 15px;
+  }
+}
+
+/* Image Responsiveness */
+.img-fluid {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Typography Responsive */
+@media (max-width: 768px) {
+  h1 {
+      font-size: 2rem;
+  }
+
+  h2 {
+      font-size: 1.75rem;
+  }
+
+  h3 {
+      font-size: 1.5rem;
+  }
+
+  p {
+      font-size: 1rem;
+  }
+}

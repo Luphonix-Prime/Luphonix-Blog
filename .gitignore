@@ -2,3 +2,5 @@
 /wagtail_app/home/__pycache__
 /wagtail_app/blog/__pycache__
 __pycache__
+settings.py
+/wagtail_app/settings.py
