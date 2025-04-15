@@ -1,0 +1,3 @@
+"""
+Blog app for Wagtail
+"""

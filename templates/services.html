@@ -1,0 +1,446 @@
+{% extends "base.html" %}
+
+{% block title %}Services | luphonix-Blog{% endblock %}
+
+{% block content %}
+<!-- Page Header -->
+<section class="page-header">
+    <div class="container">
+        <h1 class="page-title" data-animation="fade-up">Our Services</h1>
+        <div class="breadcrumb">
+            <a href="/">Home</a> <span>&gt;</span> <span>Services</span>
+        </div>
+    </div>
+    <div class="page-header-shape"></div>
+</section>
+
+<!-- Services Intro Section -->
+<section class="services-intro-section section-padding">
+    <div class="container">
+        <div class="section-intro text-center">
+            <h2 class="section-title" data-animation="fade-up">Comprehensive Technology Solutions</h2>
+            <p class="section-description" data-animation="fade-up" data-delay="0.2">
+                We offer a wide range of technology services tailored to meet the unique needs of modern businesses. From web and mobile development to cloud infrastructure and AI solutions, our team delivers quality results that drive growth and innovation.
+            </p>
+        </div>
+    </div>
+</section>
+
+<!-- Services Grid Section -->
+<section class="services-grid-section section-padding bg-dark">
+    <div class="container">
+        <div class="services-grid">
+            {% for service in services %}
+            <div class="service-card" id="{{ service.link.split('#')[1] }}" data-animation="fade-up" data-delay="{{ loop.index0 * 0.1 }}">
+                <div class="service-icon"><i class="{{ service.icon }}"></i></div>
+                <h3 class="service-title">{{ service.title }}</h3>
+                <p class="service-description">{{ service.description }}</p>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<!-- Service Detail Sections -->
+<section class="service-details-section section-padding">
+    <div class="container">
+        <!-- Web Development -->
+        <div class="service-detail" id="web-development">
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="service-content">
+                        <h2 class="section-title" data-animation="fade-up">Web Development</h2>
+                        <p class="section-description" data-animation="fade-up" data-delay="0.2">
+                            We create responsive, user-friendly web applications that deliver exceptional user experiences and drive business results.
+                        </p>
+                        
+                        <div class="service-features">
+                            <div class="feature-item" data-animation="fade-up" data-delay="0.3">
+                                <div class="feature-icon"><i class="fas fa-check-circle"></i></div>
+                                <div class="feature-content">
+                                    <h4>Responsive Design</h4>
+                                    <p>Websites optimized for all devices, from mobile to desktop</p>
+                                </div>
+                            </div>
+                            
+                            <div class="feature-item" data-animation="fade-up" data-delay="0.4">
+                                <div class="feature-icon"><i class="fas fa-check-circle"></i></div>
+                                <div class="feature-content">
+                                    <h4>Front-end Excellence</h4>
+                                    <p>Modern frameworks like React, Vue, and Angular for interactive UIs</p>
+                                </div>
+                            </div>
+                            
+                            <div class="feature-item" data-animation="fade-up" data-delay="0.5">
+                                <div class="feature-icon"><i class="fas fa-check-circle"></i></div>
+                                <div class="feature-content">
+                                    <h4>Robust Back-end</h4>
+                                    <p>Scalable server-side solutions using Node.js, Python, or PHP</p>
+                                </div>
+                            </div>
+                            
+                            <div class="feature-item" data-animation="fade-up" data-delay="0.6">
+                                <div class="feature-icon"><i class="fas fa-check-circle"></i></div>
+                                <div class="feature-content">
+                                    <h4>E-commerce Solutions</h4>
+                                    <p>Secure, high-performance online stores with payment integration</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="service-image" data-animation="fade-up" data-delay="0.3">
+                        <img src="/static/img/services/web-development.svg" alt="Web Development" class="img-fluid">
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Mobile Applications -->
+        <div class="service-detail" id="mobile-apps">
+            <div class="row flex-row-reverse">
+                <div class="col-lg-6">
+                    <div class="service-content">
+                        <h2 class="section-title" data-animation="fade-up">Mobile Applications</h2>
+                        <p class="section-description" data-animation="fade-up" data-delay="0.2">
+                            We develop innovative, high-performance mobile applications for iOS and Android platforms, focusing on user experience and business objectives.
+                        </p>
+                        
+                        <div class="service-features">
+                            <div class="feature-item" data-animation="fade-up" data-delay="0.3">
+                                <div class="feature-icon"><i class="fas fa-check-circle"></i></div>
+                                <div class="feature-content">
+                                    <h4>Native Development</h4>
+                                    <p>Platform-specific apps using Swift, Kotlin, or Java</p>
+                                </div>
+                            </div>
+                            
+                            <div class="feature-item" data-animation="fade-up" data-delay="0.4">
+                                <div class="feature-icon"><i class="fas fa-check-circle"></i></div>
+                                <div class="feature-content">
+                                    <h4>Cross-Platform Solutions</h4>
+                                    <p>Efficient development with React Native or Flutter</p>
+                                </div>
+                            </div>
+                            
+                            <div class="feature-item" data-animation="fade-up" data-delay="0.5">
+                                <div class="feature-icon"><i class="fas fa-check-circle"></i></div>
+                                <div class="feature-content">
+                                    <h4>Innovative UX/UI</h4>
+                                    <p>Intuitive interfaces that delight users</p>
+                                </div>
+                            </div>
+                            
+                            <div class="feature-item" data-animation="fade-up" data-delay="0.6">
+                                <div class="feature-icon"><i class="fas fa-check-circle"></i></div>
+                                <div class="feature-content">
+                                    <h4>Maintenance & Updates</h4>
+                                    <p>Ongoing support to ensure your app remains current</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="service-image" data-animation="fade-up" data-delay="0.3">
+                        <img src="/static/img/services/mobile-development.svg" alt="Mobile Applications" class="img-fluid">
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Cloud Solutions -->
+        <div class="service-detail" id="cloud-services">
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="service-content">
+                        <h2 class="section-title" data-animation="fade-up">Cloud Solutions</h2>
+                        <p class="section-description" data-animation="fade-up" data-delay="0.2">
+                            We help businesses leverage the power of cloud computing to increase agility, reduce costs, and enhance scalability.
+                        </p>
+                        
+                        <div class="service-features">
+                            <div class="feature-item" data-animation="fade-up" data-delay="0.3">
+                                <div class="feature-icon"><i class="fas fa-check-circle"></i></div>
+                                <div class="feature-content">
+                                    <h4>Cloud Migration</h4>
+                                    <p>Seamless transition of your infrastructure to the cloud</p>
+                                </div>
+                            </div>
+                            
+                            <div class="feature-item" data-animation="fade-up" data-delay="0.4">
+                                <div class="feature-icon"><i class="fas fa-check-circle"></i></div>
+                                <div class="feature-content">
+                                    <h4>Infrastructure as Code</h4>
+                                    <p>Automated, scalable infrastructure deployment</p>
+                                </div>
+                            </div>
+                            
+                            <div class="feature-item" data-animation="fade-up" data-delay="0.5">
+                                <div class="feature-icon"><i class="fas fa-check-circle"></i></div>
+                                <div class="feature-content">
+                                    <h4>Multi-Cloud Strategy</h4>
+                                    <p>Solutions across AWS, Azure, and Google Cloud</p>
+                                </div>
+                            </div>
+                            
+                            <div class="feature-item" data-animation="fade-up" data-delay="0.6">
+                                <div class="feature-icon"><i class="fas fa-check-circle"></i></div>
+                                <div class="feature-content">
+                                    <h4>Cloud Security</h4>
+                                    <p>Robust security practices to protect your data</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="service-image" data-animation="fade-up" data-delay="0.3">
+                        <img src="/static/img/services/cloud-solutions.svg" alt="Cloud Solutions" class="img-fluid">
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- AI & Machine Learning -->
+        <div class="service-detail" id="ai-ml">
+            <div class="row flex-row-reverse">
+                <div class="col-lg-6">
+                    <div class="service-content">
+                        <h2 class="section-title" data-animation="fade-up">AI & Machine Learning</h2>
+                        <p class="section-description" data-animation="fade-up" data-delay="0.2">
+                            We develop intelligent systems that leverage AI and ML to automate processes, gain insights from data, and enhance decision-making.
+                        </p>
+                        
+                        <div class="service-features">
+                            <div class="feature-item" data-animation="fade-up" data-delay="0.3">
+                                <div class="feature-icon"><i class="fas fa-check-circle"></i></div>
+                                <div class="feature-content">
+                                    <h4>Predictive Analytics</h4>
+                                    <p>Models that forecast trends and outcomes</p>
+                                </div>
+                            </div>
+                            
+                            <div class="feature-item" data-animation="fade-up" data-delay="0.4">
+                                <div class="feature-icon"><i class="fas fa-check-circle"></i></div>
+                                <div class="feature-content">
+                                    <h4>Natural Language Processing</h4>
+                                    <p>Systems that understand and process human language</p>
+                                </div>
+                            </div>
+                            
+                            <div class="feature-item" data-animation="fade-up" data-delay="0.5">
+                                <div class="feature-icon"><i class="fas fa-check-circle"></i></div>
+                                <div class="feature-content">
+                                    <h4>Computer Vision</h4>
+                                    <p>Applications that can interpret visual information</p>
+                                </div>
+                            </div>
+                            
+                            <div class="feature-item" data-animation="fade-up" data-delay="0.6">
+                                <div class="feature-icon"><i class="fas fa-check-circle"></i></div>
+                                <div class="feature-content">
+                                    <h4>Recommendation Systems</h4>
+                                    <p>Algorithms that provide personalized suggestions</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="service-image" data-animation="fade-up" data-delay="0.3">
+                        <img src="/static/img/services/ai-ml.svg" alt="AI & Machine Learning" class="img-fluid">
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- IT Consulting -->
+        <div class="service-detail" id="it-consulting">
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="service-content">
+                        <h2 class="section-title" data-animation="fade-up">IT Consulting</h2>
+                        <p class="section-description" data-animation="fade-up" data-delay="0.2">
+                            We provide strategic guidance to help businesses leverage technology effectively to achieve their objectives and stay competitive.
+                        </p>
+                        
+                        <div class="service-features">
+                            <div class="feature-item" data-animation="fade-up" data-delay="0.3">
+                                <div class="feature-icon"><i class="fas fa-check-circle"></i></div>
+                                <div class="feature-content">
+                                    <h4>Technology Strategy</h4>
+                                    <p>Roadmaps aligned with your business goals</p>
+                                </div>
+                            </div>
+                            
+                            <div class="feature-item" data-animation="fade-up" data-delay="0.4">
+                                <div class="feature-icon"><i class="fas fa-check-circle"></i></div>
+                                <div class="feature-content">
+                                    <h4>Digital Transformation</h4>
+                                    <p>Guidance on modernizing your business processes</p>
+                                </div>
+                            </div>
+                            
+                            <div class="feature-item" data-animation="fade-up" data-delay="0.5">
+                                <div class="feature-icon"><i class="fas fa-check-circle"></i></div>
+                                <div class="feature-content">
+                                    <h4>Technology Selection</h4>
+                                    <p>Expert advice on choosing the right tools and platforms</p>
+                                </div>
+                            </div>
+                            
+                            <div class="feature-item" data-animation="fade-up" data-delay="0.6">
+                                <div class="feature-icon"><i class="fas fa-check-circle"></i></div>
+                                <div class="feature-content">
+                                    <h4>Process Optimization</h4>
+                                    <p>Streamlining workflows for efficiency</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="service-image" data-animation="fade-up" data-delay="0.3">
+                        <img src="/static/img/services/it-consulting.svg" alt="IT Consulting" class="img-fluid">
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Cybersecurity -->
+        <div class="service-detail" id="cybersecurity">
+            <div class="row flex-row-reverse">
+                <div class="col-lg-6">
+                    <div class="service-content">
+                        <h2 class="section-title" data-animation="fade-up">Cybersecurity</h2>
+                        <p class="section-description" data-animation="fade-up" data-delay="0.2">
+                            We help businesses protect their digital assets with comprehensive security strategies and solutions.
+                        </p>
+                        
+                        <div class="service-features">
+                            <div class="feature-item" data-animation="fade-up" data-delay="0.3">
+                                <div class="feature-icon"><i class="fas fa-check-circle"></i></div>
+                                <div class="feature-content">
+                                    <h4>Security Assessments</h4>
+                                    <p>Identifying vulnerabilities in your systems</p>
+                                </div>
+                            </div>
+                            
+                            <div class="feature-item" data-animation="fade-up" data-delay="0.4">
+                                <div class="feature-icon"><i class="fas fa-check-circle"></i></div>
+                                <div class="feature-content">
+                                    <h4>Penetration Testing</h4>
+                                    <p>Simulated attacks to test your defenses</p>
+                                </div>
+                            </div>
+                            
+                            <div class="feature-item" data-animation="fade-up" data-delay="0.5">
+                                <div class="feature-icon"><i class="fas fa-check-circle"></i></div>
+                                <div class="feature-content">
+                                    <h4>Security Protocols</h4>
+                                    <p>Implementation of best practices and compliance standards</p>
+                                </div>
+                            </div>
+                            
+                            <div class="feature-item" data-animation="fade-up" data-delay="0.6">
+                                <div class="feature-icon"><i class="fas fa-check-circle"></i></div>
+                                <div class="feature-content">
+                                    <h4>Incident Response</h4>
+                                    <p>Plans and support for handling security breaches</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="service-image" data-animation="fade-up" data-delay="0.3">
+                        <img src="/static/img/services/cybersecurity.svg" alt="Cybersecurity" class="img-fluid">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Process Section -->
+<section class="process-section section-padding bg-dark">
+    <div class="container">
+        <div class="section-intro text-center">
+            <h2 class="section-title" data-animation="fade-up">Our Approach</h2>
+            <p class="section-description" data-animation="fade-up" data-delay="0.2">
+                We follow a structured process to ensure the successful delivery of every project.
+            </p>
+        </div>
+        
+        <div class="process-flow">
+            <div class="process-step" data-animation="fade-right">
+                <div class="step-number">01</div>
+                <div class="step-content">
+                    <h3 class="step-title">Discovery</h3>
+                    <p class="step-description">We begin by understanding your goals, requirements, and challenges through in-depth discussions and research.</p>
+                </div>
+            </div>
+            
+            <div class="process-step" data-animation="fade-left">
+                <div class="step-number">02</div>
+                <div class="step-content">
+                    <h3 class="step-title">Planning</h3>
+                    <p class="step-description">We create a detailed project plan outlining timelines, deliverables, resources, and communication channels.</p>
+                </div>
+            </div>
+            
+            <div class="process-step" data-animation="fade-right">
+                <div class="step-number">03</div>
+                <div class="step-content">
+                    <h3 class="step-title">Design</h3>
+                    <p class="step-description">Our team crafts wireframes, prototypes, and architectural blueprints for your approval before implementation.</p>
+                </div>
+            </div>
+            
+            <div class="process-step" data-animation="fade-left">
+                <div class="step-number">04</div>
+                <div class="step-content">
+                    <h3 class="step-title">Development</h3>
+                    <p class="step-description">We build your solution using agile methodologies, with regular iterations and feedback sessions.</p>
+                </div>
+            </div>
+            
+            <div class="process-step" data-animation="fade-right">
+                <div class="step-number">05</div>
+                <div class="step-content">
+                    <h3 class="step-title">Testing</h3>
+                    <p class="step-description">Rigorous quality assurance ensures your solution works flawlessly across all scenarios and environments.</p>
+                </div>
+            </div>
+            
+            <div class="process-step" data-animation="fade-left">
+                <div class="step-number">06</div>
+                <div class="step-content">
+                    <h3 class="step-title">Deployment</h3>
+                    <p class="step-description">We carefully launch your solution, ensuring a smooth transition and minimal disruption.</p>
+                </div>
+            </div>
+            
+            <div class="process-step" data-animation="fade-right">
+                <div class="step-number">07</div>
+                <div class="step-content">
+                    <h3 class="step-title">Support</h3>
+                    <p class="step-description">Our relationship continues with ongoing maintenance, support, and enhancements as needed.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- CTA Section -->
+<section class="cta-section section-padding">
+    <div class="container">
+        <h2 class="cta-title" data-animation="fade-up">Ready to Start Your Project?</h2>
+        <p class="cta-description" data-animation="fade-up" data-delay="0.2">Let's discuss how our services can help your business achieve its technology goals.</p>
+        <a href="/contact/" class="btn btn-primary btn-lg" data-animation="fade-up" data-delay="0.4">Contact Us</a>
+    </div>
+    <div class="cta-shape"></div>
+</section>
+{% endblock %}

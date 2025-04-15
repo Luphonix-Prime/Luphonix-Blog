@@ -1,0 +1,306 @@
+{% extends "base.html" %}
+
+{% block title %}Our Team | luphonix-Blog{% endblock %}
+
+{% block content %}
+<!-- Page Header -->
+<section class="page-header">
+    <div class="container">
+        <h1 class="page-title" data-animation="fade-up">Our Team</h1>
+        <div class="breadcrumb">
+            <a href="/">Home</a> <span>&gt;</span> <span>Our Team</span>
+        </div>
+    </div>
+    <div class="page-header-shape"></div>
+</section>
+
+<!-- Team Intro Section -->
+<section class="team-intro-section section-padding">
+    <div class="container">
+        <div class="section-intro text-center">
+            <h2 class="section-title" data-animation="fade-up">Meet the Talent Behind Our Success</h2>
+            <p class="section-description" data-animation="fade-up" data-delay="0.2">
+                Our team consists of passionate experts in various technology domains, working together to deliver exceptional solutions for our clients.
+            </p>
+        </div>
+    </div>
+</section>
+
+<!-- Leadership Team Section -->
+<section class="leadership-section section-padding bg-dark">
+    <div class="container">
+        <div class="section-intro text-center">
+            <h2 class="section-title" data-animation="fade-up">Leadership Team</h2>
+            <p class="section-description" data-animation="fade-up" data-delay="0.2">
+                The visionaries guiding our company's direction and growth.
+            </p>
+        </div>
+        
+        <div class="team-grid">
+            {% for member in team_members %}
+            <div class="team-card large" data-animation="fade-up" data-delay="{{ loop.index0 * 0.1 }}">
+                <div class="team-image">
+                    {% if member.photo %}
+                        <img src="{{ member.photo }}" alt="{{ member.name }}" class="img-fluid">
+                    {% else %}
+                        <div class="team-image-placeholder">
+                            <i class="fas fa-user"></i>
+                        </div>
+                    {% endif %}
+                </div>
+                <div class="team-content">
+                    <h3 class="team-name">{{ member.name }}</h3>
+                    <p class="team-position">{{ member.position }}</p>
+                    <p class="team-bio">{{ member.bio }}</p>
+                    <div class="team-social">
+                        {% if member.email %}
+                            <a href="mailto:{{ member.email }}" aria-label="Email"><i class="fas fa-envelope"></i></a>
+                        {% endif %}
+                        {% if member.linkedin %}
+                            <a href="{{ member.linkedin }}" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                        {% endif %}
+                        {% if member.twitter %}
+                            <a href="{{ member.twitter }}" target="_blank" rel="noopener noreferrer" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<!-- Department Sections -->
+<section class="departments-section section-padding">
+    <div class="container">
+        <div class="department-block">
+            <div class="section-intro">
+                <h2 class="section-title" data-animation="fade-up">Development Team</h2>
+                <p class="section-description" data-animation="fade-up" data-delay="0.2">
+                    Our skilled developers who turn concepts into robust, scalable solutions.
+                </p>
+            </div>
+            
+            <div class="team-grid">
+                <!-- Development Team -->
+                <div class="team-card" data-animation="fade-up" data-delay="0.1">
+                    <div class="team-image">
+                        <div class="team-image-placeholder">
+                            <i class="fas fa-user"></i>
+                        </div>
+                    </div>
+                    <div class="team-content">
+                        <h3 class="team-name">Alex Rodriguez</h3>
+                        <p class="team-position">Lead Backend Developer</p>
+                        <p class="team-bio">Expert in scalable architecture with 8+ years of experience in cloud technologies.</p>
+                    </div>
+                </div>
+                
+                <div class="team-card" data-animation="fade-up" data-delay="0.2">
+                    <div class="team-image">
+                        <div class="team-image-placeholder">
+                            <i class="fas fa-user"></i>
+                        </div>
+                    </div>
+                    <div class="team-content">
+                        <h3 class="team-name">Jessica Lee</h3>
+                        <p class="team-position">Frontend Lead</p>
+                        <p class="team-bio">Passionate about creating intuitive UI/UX with expertise in modern JavaScript frameworks.</p>
+                    </div>
+                </div>
+                
+                <div class="team-card" data-animation="fade-up" data-delay="0.3">
+                    <div class="team-image">
+                        <div class="team-image-placeholder">
+                            <i class="fas fa-user"></i>
+                        </div>
+                    </div>
+                    <div class="team-content">
+                        <h3 class="team-name">David Kim</h3>
+                        <p class="team-position">DevOps Engineer</p>
+                        <p class="team-bio">Automation expert focusing on CI/CD pipelines and infrastructure as code.</p>
+                    </div>
+                </div>
+                
+                <div class="team-card" data-animation="fade-up" data-delay="0.4">
+                    <div class="team-image">
+                        <div class="team-image-placeholder">
+                            <i class="fas fa-user"></i>
+                        </div>
+                    </div>
+                    <div class="team-content">
+                        <h3 class="team-name">Priya Sharma</h3>
+                        <p class="team-position">Mobile Developer</p>
+                        <p class="team-bio">Specialist in cross-platform mobile app development with React Native and Flutter.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="department-block">
+            <div class="section-intro">
+                <h2 class="section-title" data-animation="fade-up">Design Team</h2>
+                <p class="section-description" data-animation="fade-up" data-delay="0.2">
+                    Our creative designers who craft beautiful, user-centered digital experiences.
+                </p>
+            </div>
+            
+            <div class="team-grid">
+                <!-- Design Team -->
+                <div class="team-card" data-animation="fade-up" data-delay="0.1">
+                    <div class="team-image">
+                        <div class="team-image-placeholder">
+                            <i class="fas fa-user"></i>
+                        </div>
+                    </div>
+                    <div class="team-content">
+                        <h3 class="team-name">Emma Wilson</h3>
+                        <p class="team-position">UX Designer</p>
+                        <p class="team-bio">User experience specialist with a focus on research-driven design decisions.</p>
+                    </div>
+                </div>
+                
+                <div class="team-card" data-animation="fade-up" data-delay="0.2">
+                    <div class="team-image">
+                        <div class="team-image-placeholder">
+                            <i class="fas fa-user"></i>
+                        </div>
+                    </div>
+                    <div class="team-content">
+                        <h3 class="team-name">James Chen</h3>
+                        <p class="team-position">UI Designer</p>
+                        <p class="team-bio">Visual design expert with a strong background in brand identity and digital interfaces.</p>
+                    </div>
+                </div>
+                
+                <div class="team-card" data-animation="fade-up" data-delay="0.3">
+                    <div class="team-image">
+                        <div class="team-image-placeholder">
+                            <i class="fas fa-user"></i>
+                        </div>
+                    </div>
+                    <div class="team-content">
+                        <h3 class="team-name">Sophie Martin</h3>
+                        <p class="team-position">Motion Designer</p>
+                        <p class="team-bio">Animation specialist who brings digital interfaces to life with subtle movements and transitions.</p>
+                    </div>
+                </div>
+                
+                <div class="team-card" data-animation="fade-up" data-delay="0.4">
+                    <div class="team-image">
+                        <div class="team-image-placeholder">
+                            <i class="fas fa-user"></i>
+                        </div>
+                    </div>
+                    <div class="team-content">
+                        <h3 class="team-name">Daniel Rivera</h3>
+                        <p class="team-position">Graphic Designer</p>
+                        <p class="team-bio">Versatile graphic designer with expertise in branding, print, and digital media.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Work Culture Section -->
+<section class="culture-section section-padding bg-dark">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="culture-content">
+                    <h2 class="section-title" data-animation="fade-up">Our Work Culture</h2>
+                    <p class="section-description" data-animation="fade-up" data-delay="0.2">
+                        At ITStartup, we foster a collaborative and inclusive environment where creativity thrives and innovation is encouraged. Our culture is built on mutual respect, continuous learning, and open communication.
+                    </p>
+                    
+                    <div class="culture-features">
+                        <div class="culture-feature" data-animation="fade-up" data-delay="0.3">
+                            <div class="feature-icon"><i class="fas fa-brain"></i></div>
+                            <div class="feature-content">
+                                <h3>Continuous Learning</h3>
+                                <p>We invest in our team's growth through training, conferences, and learning resources.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="culture-feature" data-animation="fade-up" data-delay="0.4">
+                            <div class="feature-icon"><i class="fas fa-balance-scale"></i></div>
+                            <div class="feature-content">
+                                <h3>Work-Life Balance</h3>
+                                <p>We believe in the importance of maintaining a healthy balance between professional and personal life.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="culture-feature" data-animation="fade-up" data-delay="0.5">
+                            <div class="feature-icon"><i class="fas fa-comments"></i></div>
+                            <div class="feature-content">
+                                <h3>Open Communication</h3>
+                                <p>We encourage open dialogue and value diverse perspectives in our decision-making process.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="culture-image" data-animation="fade-up" data-delay="0.3">
+                    <img src="/static/img/team-culture.svg" alt="Work Culture" class="img-fluid">
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Join Us Section -->
+<section class="join-us-section section-padding">
+    <div class="container">
+        <div class="section-intro text-center">
+            <h2 class="section-title" data-animation="fade-up">Join Our Team</h2>
+            <p class="section-description" data-animation="fade-up" data-delay="0.2">
+                We're always looking for talented individuals who are passionate about technology and innovation.
+            </p>
+        </div>
+        
+        <div class="benefits-grid">
+            <div class="benefit-card" data-animation="fade-up" data-delay="0.1">
+                <div class="benefit-icon"><i class="fas fa-laptop-code"></i></div>
+                <h3 class="benefit-title">Cutting-Edge Projects</h3>
+                <p class="benefit-description">Work on challenging projects using the latest technologies and methodologies.</p>
+            </div>
+            
+            <div class="benefit-card" data-animation="fade-up" data-delay="0.2">
+                <div class="benefit-icon"><i class="fas fa-chart-line"></i></div>
+                <h3 class="benefit-title">Career Growth</h3>
+                <p class="benefit-description">Clear career pathways with opportunities for advancement and specialization.</p>
+            </div>
+            
+            <div class="benefit-card" data-animation="fade-up" data-delay="0.3">
+                <div class="benefit-icon"><i class="fas fa-user-graduate"></i></div>
+                <h3 class="benefit-title">Learning & Development</h3>
+                <p class="benefit-description">Regular training, workshops, and knowledge-sharing sessions to keep you growing.</p>
+            </div>
+            
+            <div class="benefit-card" data-animation="fade-up" data-delay="0.4">
+                <div class="benefit-icon"><i class="fas fa-globe"></i></div>
+                <h3 class="benefit-title">Remote Flexibility</h3>
+                <p class="benefit-description">Flexible work arrangements with the option to work remotely.</p>
+            </div>
+            
+            <div class="benefit-card" data-animation="fade-up" data-delay="0.5">
+                <div class="benefit-icon"><i class="fas fa-hand-holding-heart"></i></div>
+                <h3 class="benefit-title">Comprehensive Benefits</h3>
+                <p class="benefit-description">Competitive salary, health insurance, retirement plans, and wellness programs.</p>
+            </div>
+            
+            <div class="benefit-card" data-animation="fade-up" data-delay="0.6">
+                <div class="benefit-icon"><i class="fas fa-users"></i></div>
+                <h3 class="benefit-title">Inclusive Culture</h3>
+                <p class="benefit-description">A diverse, inclusive, and supportive work environment where everyone is valued.</p>
+            </div>
+        </div>
+        
+        <div class="text-center mt-5">
+            <a href="/careers/" class="btn btn-primary btn-lg" data-animation="fade-up">View Open Positions</a>
+        </div>
+    </div>
+</section>
+{% endblock %}

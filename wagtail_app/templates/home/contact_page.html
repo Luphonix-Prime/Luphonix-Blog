@@ -1,0 +1,263 @@
+{% extends "base.html" %}
+{% load wagtailcore_tags wagtailimages_tags %}
+
+{% block content %}
+<!-- Contact Hero Section -->
+<section class="page-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 text-center">
+                <h1 class="page-title animate-on-scroll" data-animation="fadeInUp">{{ page.title }}</h1>
+                <div class="breadcrumbs animate-on-scroll" data-animation="fadeInUp" data-delay="200">
+                    <a href="/">Home</a> / <span>Contact</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Introduction Section -->
+{% if page.intro_title or page.intro_text %}
+<section class="intro-section section-padding">
+    <div class="container">
+        <div class="section-header text-center">
+            <h2 class="section-title animate-on-scroll" data-animation="fadeInUp">{{ page.intro_title }}</h2>
+            <div class="section-divider animate-on-scroll" data-animation="scaleWidth" data-delay="200"></div>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <div class="intro-content animate-on-scroll" data-animation="fadeInUp" data-delay="400">
+                    {{ page.intro_text|richtext }}
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endif %}
+
+<!-- Contact Information Section -->
+<section class="contact-info-section section-padding bg-dark-accent">
+    <div class="container">
+        <div class="row">
+            <!-- Contact Form -->
+            <div class="col-lg-7 mb-5 mb-lg-0">
+                <div class="contact-form-card animate-on-scroll" data-animation="fadeInLeft">
+                    <h3 class="form-title">Send Us a Message</h3>
+                    <form id="contactForm" method="post" action="{% url 'contact_form_submit' %}">
+                        {% csrf_token %}
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <div class="form-group">
+                                    <label for="name">Your Name</label>
+                                    <input type="text" class="form-control" id="name" name="name" required>
+                                </div>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <div class="form-group">
+                                    <label for="email">Your Email</label>
+                                    <input type="email" class="form-control" id="email" name="email" required>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group mb-3">
+                            <label for="subject">Subject</label>
+                            <input type="text" class="form-control" id="subject" name="subject" required>
+                        </div>
+                        <div class="form-group mb-4">
+                            <label for="message">Your Message</label>
+                            <textarea class="form-control" id="message" name="message" rows="5" required></textarea>
+                        </div>
+                        <div class="text-center">
+                            <button type="submit" class="btn btn-primary btn-lg">Send Message</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            
+            <!-- Contact Information -->
+            <div class="col-lg-5">
+                <div class="contact-info-card animate-on-scroll" data-animation="fadeInRight">
+                    <h3 class="card-title">Contact Information</h3>
+                    
+                    {% if page.address %}
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <div class="contact-text">
+                            <h4>Our Location</h4>
+                            <p>{{ page.address }}</p>
+                        </div>
+                    </div>
+                    {% endif %}
+                    
+                    {% if page.email %}
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <div class="contact-text">
+                            <h4>Email Us</h4>
+                            <p><a href="mailto:{{ page.email }}">{{ page.email }}</a></p>
+                        </div>
+                    </div>
+                    {% endif %}
+                    
+                    {% if page.phone %}
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-phone-alt"></i>
+                        </div>
+                        <div class="contact-text">
+                            <h4>Call Us</h4>
+                            <p><a href="tel:{{ page.phone }}">{{ page.phone }}</a></p>
+                        </div>
+                    </div>
+                    {% endif %}
+                    
+                    <div class="contact-social">
+                        <h4>Follow Us</h4>
+                        <div class="social-icons">
+                            <a href="#"><i class="fab fa-twitter"></i></a>
+                            <a href="#"><i class="fab fa-facebook"></i></a>
+                            <a href="#"><i class="fab fa-linkedin"></i></a>
+                            <a href="#"><i class="fab fa-github"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Map Section -->
+{% if page.map_location %}
+<section class="map-section">
+    <div id="map" class="contact-map" data-location="{{ page.map_location }}"></div>
+</section>
+{% endif %}
+
+<!-- Contact FAQ Section -->
+<section class="faq-section section-padding">
+    <div class="container">
+        <div class="section-header text-center">
+            <h2 class="section-title animate-on-scroll" data-animation="fadeInUp">Frequently Asked Questions</h2>
+            <div class="section-divider animate-on-scroll" data-animation="scaleWidth" data-delay="200"></div>
+        </div>
+        
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <div class="accordion accordion-flush" id="contactFaq">
+                    <div class="accordion-item animate-on-scroll" data-animation="fadeInUp">
+                        <h2 class="accordion-header" id="faqOne">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                                What services do you offer?
+                            </button>
+                        </h2>
+                        <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="faqOne" data-bs-parent="#contactFaq">
+                            <div class="accordion-body">
+                                We offer a wide range of IT services including web development, mobile app development, cloud solutions, software consulting, and digital transformation services. Visit our Services page for more details.
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="accordion-item animate-on-scroll" data-animation="fadeInUp" data-delay="200">
+                        <h2 class="accordion-header" id="faqTwo">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                How long does it take to complete a project?
+                            </button>
+                        </h2>
+                        <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="faqTwo" data-bs-parent="#contactFaq">
+                            <div class="accordion-body">
+                                Project timelines vary depending on the complexity and scope of your requirements. After our initial consultation, we'll provide you with an estimated timeline for your specific project.
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="accordion-item animate-on-scroll" data-animation="fadeInUp" data-delay="400">
+                        <h2 class="accordion-header" id="faqThree">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                Do you provide ongoing support after project completion?
+                            </button>
+                        </h2>
+                        <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="faqThree" data-bs-parent="#contactFaq">
+                            <div class="accordion-body">
+                                Yes, we offer various support and maintenance packages to ensure your solution remains up-to-date and performs optimally. Our team is always available to address any issues or implement enhancements.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+{% block extra_js %}
+{% if page.map_location %}
+<script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&callback=initMap" async defer></script>
+<script>
+    function initMap() {
+        const mapElement = document.getElementById('map');
+        const locationStr = mapElement.getAttribute('data-location');
+        const locationArray = locationStr.split(',').map(coord => parseFloat(coord.trim()));
+        
+        if (locationArray.length === 2) {
+            const mapLocation = { lat: locationArray[0], lng: locationArray[1] };
+            
+            const map = new google.maps.Map(mapElement, {
+                zoom: 15,
+                center: mapLocation,
+                styles: [
+                    // Dark theme map styles
+                    {elementType: 'geometry', stylers: [{color: '#242f3e'}]},
+                    {elementType: 'labels.text.stroke', stylers: [{color: '#242f3e'}]},
+                    {elementType: 'labels.text.fill', stylers: [{color: '#746855'}]},
+                    {
+                        featureType: 'administrative.locality',
+                        elementType: 'labels.text.fill',
+                        stylers: [{color: '#d59563'}]
+                    },
+                    {
+                        featureType: 'road',
+                        elementType: 'geometry',
+                        stylers: [{color: '#38414e'}]
+                    },
+                    {
+                        featureType: 'road',
+                        elementType: 'geometry.stroke',
+                        stylers: [{color: '#212a37'}]
+                    },
+                    {
+                        featureType: 'road',
+                        elementType: 'labels.text.fill',
+                        stylers: [{color: '#9ca5b3'}]
+                    },
+                    {
+                        featureType: 'water',
+                        elementType: 'geometry',
+                        stylers: [{color: '#17263c'}]
+                    },
+                    {
+                        featureType: 'water',
+                        elementType: 'labels.text.fill',
+                        stylers: [{color: '#515c6d'}]
+                    },
+                    {
+                        featureType: 'water',
+                        elementType: 'labels.text.stroke',
+                        stylers: [{color: '#17263c'}]
+                    }
+                ]
+            });
+            
+            const marker = new google.maps.Marker({
+                position: mapLocation,
+                map: map,
+                title: 'Our Location'
+            });
+        }
+    }
+</script>
+{% endif %}
+{% endblock %}

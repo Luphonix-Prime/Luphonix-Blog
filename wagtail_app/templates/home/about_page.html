@@ -1,0 +1,147 @@
+{% extends "base.html" %}
+{% load wagtailcore_tags wagtailimages_tags %}
+
+{% block content %}
+<!-- About Hero Section -->
+<section class="page-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 text-center">
+                <h1 class="page-title animate-on-scroll" data-animation="fadeInUp">{{ page.title }}</h1>
+                <div class="breadcrumbs animate-on-scroll" data-animation="fadeInUp" data-delay="200">
+                    <a href="/">Home</a> / <span>About</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Introduction Section -->
+{% if page.intro_title or page.intro_text %}
+<section class="intro-section section-padding">
+    <div class="container">
+        <div class="section-header text-center">
+            <h2 class="section-title animate-on-scroll" data-animation="fadeInUp">{{ page.intro_title }}</h2>
+            <div class="section-divider animate-on-scroll" data-animation="scaleWidth" data-delay="200"></div>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <div class="intro-content animate-on-scroll" data-animation="fadeInUp" data-delay="400">
+                    {{ page.intro_text|richtext }}
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endif %}
+
+<!-- Vision & Mission Section -->
+{% if page.vision_title or page.mission_title %}
+<section class="vision-mission-section section-padding bg-dark-accent">
+    <div class="container">
+        <div class="row">
+            {% if page.vision_title or page.vision_text %}
+            <div class="col-lg-6 mb-4 mb-lg-0">
+                <div class="vision-card card-hover animate-on-scroll" data-animation="fadeInLeft">
+                    <div class="card-icon">
+                        <i class="fas fa-eye"></i>
+                    </div>
+                    <h3 class="card-title">{{ page.vision_title }}</h3>
+                    <div class="card-content">
+                        {{ page.vision_text|richtext }}
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+            
+            {% if page.mission_title or page.mission_text %}
+            <div class="col-lg-6">
+                <div class="mission-card card-hover animate-on-scroll" data-animation="fadeInRight">
+                    <div class="card-icon">
+                        <i class="fas fa-bullseye"></i>
+                    </div>
+                    <h3 class="card-title">{{ page.mission_title }}</h3>
+                    <div class="card-content">
+                        {{ page.mission_text|richtext }}
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</section>
+{% endif %}
+
+<!-- History Section -->
+{% if page.history_title or page.history_text %}
+<section class="history-section section-padding">
+    <div class="container">
+        <div class="section-header text-center">
+            <h2 class="section-title animate-on-scroll" data-animation="fadeInUp">{{ page.history_title }}</h2>
+            <div class="section-divider animate-on-scroll" data-animation="scaleWidth" data-delay="200"></div>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-lg-10">
+                <div class="history-content animate-on-scroll" data-animation="fadeInUp" data-delay="400">
+                    {{ page.history_text|richtext }}
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endif %}
+
+<!-- Team Section -->
+<section class="team-section section-padding bg-dark-accent">
+    <div class="container">
+        <div class="section-header text-center">
+            <h2 class="section-title animate-on-scroll" data-animation="fadeInUp">Our Team</h2>
+            <div class="section-divider animate-on-scroll" data-animation="scaleWidth" data-delay="200"></div>
+            <p class="section-subtitle animate-on-scroll" data-animation="fadeInUp" data-delay="400">Meet the talented people behind our success</p>
+        </div>
+        
+        <div class="row">
+            {% load wagtailsnippets_tags %}
+            {% get_snippets "home.TeamMember" as team_members %}
+            
+            {% for member in team_members %}
+            <div class="col-lg-3 col-md-6 mb-4">
+                <div class="team-card animate-on-scroll" data-animation="fadeInUp" data-delay="{{ forloop.counter|add:2 }}00">
+                    <div class="team-image">
+                        {% if member.photo %}
+                        {% image member.photo fill-300x300 class="img-fluid" %}
+                        {% else %}
+                        <div class="placeholder-image">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="300" height="300" viewBox="0 0 300 300" fill="none">
+                                <rect width="300" height="300" fill="#333"/>
+                                <text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="#666" font-size="18">Team Member</text>
+                            </svg>
+                        </div>
+                        {% endif %}
+                        <div class="team-social">
+                            {% if member.email %}
+                            <a href="mailto:{{ member.email }}"><i class="fas fa-envelope"></i></a>
+                            {% endif %}
+                            {% if member.linkedin %}
+                            <a href="{{ member.linkedin }}" target="_blank"><i class="fab fa-linkedin"></i></a>
+                            {% endif %}
+                            {% if member.twitter %}
+                            <a href="{{ member.twitter }}" target="_blank"><i class="fab fa-twitter"></i></a>
+                            {% endif %}
+                        </div>
+                    </div>
+                    <div class="team-info">
+                        <h4 class="team-name">{{ member.name }}</h4>
+                        <p class="team-position">{{ member.position }}</p>
+                    </div>
+                </div>
+            </div>
+            {% empty %}
+            <div class="col-12 text-center">
+                <p>No team members available at the moment.</p>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endblock %}

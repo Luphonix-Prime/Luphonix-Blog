@@ -1,0 +1,173 @@
+{% extends "base.html" %}
+{% load wagtailcore_tags wagtailimages_tags %}
+
+{% block content %}
+<!-- Services Hero Section -->
+<section class="page-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 text-center">
+                <h1 class="page-title animate-on-scroll" data-animation="fadeInUp">{{ page.title }}</h1>
+                <div class="breadcrumbs animate-on-scroll" data-animation="fadeInUp" data-delay="200">
+                    <a href="/">Home</a> / <span>Services</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Introduction Section -->
+{% if page.intro_title or page.intro_text %}
+<section class="intro-section section-padding">
+    <div class="container">
+        <div class="section-header text-center">
+            <h2 class="section-title animate-on-scroll" data-animation="fadeInUp">{{ page.intro_title }}</h2>
+            <div class="section-divider animate-on-scroll" data-animation="scaleWidth" data-delay="200"></div>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <div class="intro-content animate-on-scroll" data-animation="fadeInUp" data-delay="400">
+                    {{ page.intro_text|richtext }}
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endif %}
+
+<!-- Services Section -->
+{% if page.services %}
+<section class="services-grid-section section-padding bg-dark-accent">
+    <div class="container">
+        <div class="row">
+            {% for block in page.services %}
+            <div class="col-lg-4 col-md-6 mb-4">
+                <div class="service-card service-card-large animate-on-scroll" data-animation="fadeInUp" data-delay="{{ forloop.counter|add:1 }}00">
+                    {% if block.value.icon %}
+                    <div class="service-icon">
+                        <i class="{{ block.value.icon }}"></i>
+                    </div>
+                    {% endif %}
+                    <h3 class="service-title">{{ block.value.title }}</h3>
+                    <div class="service-divider"></div>
+                    <p class="service-text">{{ block.value.description }}</p>
+                    {% if block.value.link %}
+                    <a href="{{ block.value.link }}" class="btn btn-outline-primary mt-3">Learn More</a>
+                    {% endif %}
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endif %}
+
+<!-- Process Section -->
+<section class="process-section section-padding">
+    <div class="container">
+        <div class="section-header text-center">
+            <h2 class="section-title animate-on-scroll" data-animation="fadeInUp">Our Process</h2>
+            <div class="section-divider animate-on-scroll" data-animation="scaleWidth" data-delay="200"></div>
+            <p class="section-subtitle animate-on-scroll" data-animation="fadeInUp" data-delay="400">How we work to deliver exceptional results</p>
+        </div>
+
+        <div class="process-timeline">
+            <div class="process-item animate-on-scroll" data-animation="fadeInLeft">
+                <div class="process-number">01</div>
+                <div class="process-content">
+                    <h3 class="process-title">Discovery & Planning</h3>
+                    <p class="process-text">We start by understanding your requirements and defining project scope and goals.</p>
+                </div>
+            </div>
+            <div class="process-item animate-on-scroll" data-animation="fadeInRight" data-delay="200">
+                <div class="process-number">02</div>
+                <div class="process-content">
+                    <h3 class="process-title">Design & Architecture</h3>
+                    <p class="process-text">Creating detailed designs and technical specifications for your project.</p>
+                </div>
+            </div>
+            <div class="process-item animate-on-scroll" data-animation="fadeInLeft" data-delay="400">
+                <div class="process-number">03</div>
+                <div class="process-content">
+                    <h3 class="process-title">Development & Testing</h3>
+                    <p class="process-text">Building your solution with quality assurance at every step.</p>
+                </div>
+            </div>
+            <div class="process-item animate-on-scroll" data-animation="fadeInRight" data-delay="600">
+                <div class="process-number">04</div>
+                <div class="process-content">
+                    <h3 class="process-title">Deployment & Support</h3>
+                    <p class="process-text">Launching your project and providing ongoing maintenance and support.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Technology Stack Section -->
+<section class="tech-stack-section section-padding bg-dark-accent">
+    <div class="container">
+        <div class="section-header text-center">
+            <h2 class="section-title animate-on-scroll" data-animation="fadeInUp">Our Technology Stack</h2>
+            <div class="section-divider animate-on-scroll" data-animation="scaleWidth" data-delay="200"></div>
+            <p class="section-subtitle animate-on-scroll" data-animation="fadeInUp" data-delay="400">Modern technologies we use to build exceptional solutions</p>
+        </div>
+
+        <div class="tech-grid">
+            <div class="tech-category animate-on-scroll" data-animation="fadeInUp">
+                <h3 class="tech-category-title"><i class="fas fa-code"></i> Frontend</h3>
+                <div class="tech-list">
+                    <span class="tech-badge">React</span>
+                    <span class="tech-badge">Angular</span>
+                    <span class="tech-badge">Vue.js</span>
+                    <span class="tech-badge">TypeScript</span>
+                    <span class="tech-badge">CSS/SASS</span>
+                </div>
+            </div>
+            <div class="tech-category animate-on-scroll" data-animation="fadeInUp" data-delay="200">
+                <h3 class="tech-category-title"><i class="fas fa-server"></i> Backend</h3>
+                <div class="tech-list">
+                    <span class="tech-badge">Node.js</span>
+                    <span class="tech-badge">Python</span>
+                    <span class="tech-badge">Django</span>
+                    <span class="tech-badge">Flask</span>
+                    <span class="tech-badge">Java Spring</span>
+                </div>
+            </div>
+            <div class="tech-category animate-on-scroll" data-animation="fadeInUp" data-delay="400">
+                <h3 class="tech-category-title"><i class="fas fa-database"></i> Database</h3>
+                <div class="tech-list">
+                    <span class="tech-badge">PostgreSQL</span>
+                    <span class="tech-badge">MongoDB</span>
+                    <span class="tech-badge">MySQL</span>
+                    <span class="tech-badge">Redis</span>
+                    <span class="tech-badge">Firebase</span>
+                </div>
+            </div>
+            <div class="tech-category animate-on-scroll" data-animation="fadeInUp" data-delay="600">
+                <h3 class="tech-category-title"><i class="fas fa-cloud"></i> DevOps</h3>
+                <div class="tech-list">
+                    <span class="tech-badge">Docker</span>
+                    <span class="tech-badge">Kubernetes</span>
+                    <span class="tech-badge">AWS</span>
+                    <span class="tech-badge">Azure</span>
+                    <span class="tech-badge">CI/CD</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- CTA Section -->
+<section class="cta-section">
+    <div class="container">
+        <div class="cta-content text-center">
+            <h2 class="cta-title animate-on-scroll" data-animation="fadeInUp">Ready to start your project?</h2>
+            <p class="cta-subtitle animate-on-scroll" data-animation="fadeInUp" data-delay="200">Let's discuss how we can help you achieve your goals</p>
+            <div class="cta-button animate-on-scroll" data-animation="fadeInUp" data-delay="400">
+                <a href="/contact/" class="btn btn-primary btn-lg">Contact Us</a>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

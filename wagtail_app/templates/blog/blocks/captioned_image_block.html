@@ -1,0 +1,7 @@
+{% load wagtailimages_tags %}
+<figure class="captioned-image">
+    {% image value.image width-800 class="img-fluid" %}
+    {% if value.caption %}
+        <figcaption>{{ value.caption }}</figcaption>
+    {% endif %}
+</figure>
