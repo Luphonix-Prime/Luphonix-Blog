@@ -33,18 +33,17 @@ def create_user_groups():
     if not root_collection:
         root_collection = Collection.add_root(name='Root')
 
-    # Update base permissions for authors
+    # Update base permissions with correct Wagtail permission codenames
     base_permissions = {
         'editor': ['add_page', 'change_page', 'delete_page', 'publish_page'],
         'moderator': [
             'add_page', 
             'change_page', 
-            'publish_page', 
-            'moderate_page',
+            'publish_page',
             'lock_page',
             'unlock_page'
         ],
-        'author': ['add_page', 'change_page', 'submit_for_moderation']
+        'author': ['add_page', 'change_page']  # Basic permissions for authors
     }
 
     # Assign base permissions to groups
@@ -63,82 +62,48 @@ def create_user_groups():
     # Add Wagtail specific group page permissions
     root_page = Page.objects.first()
     if root_page:
-        # Get additional permissions for moderators
-        moderate_permission = Permission.objects.get(codename='moderate_page', content_type=page_content_type)
-        lock_permission = Permission.objects.get(codename='lock_page', content_type=page_content_type)
-        unlock_permission = Permission.objects.get(codename='unlock_page', content_type=page_content_type)
-
-        # Update Moderator permissions
-        GroupPagePermission.objects.get_or_create(
-            group=moderator_group,
-            page=root_page,
-            permission=edit_permission
-        )
-        GroupPagePermission.objects.get_or_create(
-            group=moderator_group,
-            page=root_page,
-            permission=publish_permission
-        )
-        GroupPagePermission.objects.get_or_create(
-            group=moderator_group,
-            page=root_page,
-            permission=moderate_permission
-        )
-        GroupPagePermission.objects.get_or_create(
-            group=moderator_group,
-            page=root_page,
-            permission=lock_permission
-        )
-        GroupPagePermission.objects.get_or_create(
-            group=moderator_group,
-            page=root_page,
-            permission=unlock_permission
-        )
-
         # Get permissions
         add_permission = Permission.objects.get(codename='add_page', content_type=page_content_type)
         edit_permission = Permission.objects.get(codename='change_page', content_type=page_content_type)
         publish_permission = Permission.objects.get(codename='publish_page', content_type=page_content_type)
 
-        # Editor permissions
-        GroupPagePermission.objects.get_or_create(
-            group=editor_group,
-            page=root_page,
-            permission=add_permission
-        )
-        GroupPagePermission.objects.get_or_create(
-            group=editor_group,
-            page=root_page,
-            permission=edit_permission
-        )
-        GroupPagePermission.objects.get_or_create(
-            group=editor_group,
-            page=root_page,
-            permission=publish_permission
-        )
-
-        # Moderator permissions
+        # Moderator permissions with correct permission types
         GroupPagePermission.objects.get_or_create(
             group=moderator_group,
             page=root_page,
-            permission=edit_permission
+            permission_type='add'
         )
         GroupPagePermission.objects.get_or_create(
             group=moderator_group,
             page=root_page,
-            permission=publish_permission
+            permission_type='edit'
+        )
+        GroupPagePermission.objects.get_or_create(
+            group=moderator_group,
+            page=root_page,
+            permission_type='publish'
+        )
+        GroupPagePermission.objects.get_or_create(
+            group=moderator_group,
+            page=root_page,
+            permission_type='lock'
         )
 
-        # Update Author permissions
+        # Author permissions with submission capability
         GroupPagePermission.objects.get_or_create(
             group=author_group,
             page=root_page,
-            permission=add_permission
+            permission_type='add'
         )
         GroupPagePermission.objects.get_or_create(
             group=author_group,
             page=root_page,
-            permission=edit_permission
+            permission_type='edit'
+        )
+        GroupPagePermission.objects.get_or_create(
+            group=author_group,
+            page=root_page,
+            permission_type='submit'
         )
 
     # Add collection permissions for images
