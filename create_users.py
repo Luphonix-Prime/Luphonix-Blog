@@ -14,7 +14,8 @@ from django.contrib.auth.models import Permission, Group
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.auth import get_user_model
 from wagtail.models import Page, GroupPagePermission
-from wagtail.core.permission_policies.pages import PagePermissionPolicy
+# Remove the incorrect import and use the correct one if needed
+# from wagtail.core.permission_policies.pages import PagePermissionPolicy
 
 User = get_user_model()
 
