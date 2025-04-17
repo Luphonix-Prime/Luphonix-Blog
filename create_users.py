@@ -13,9 +13,8 @@ django.setup()  # Setup Django first
 from django.contrib.auth.models import Permission, Group
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.auth import get_user_model
-from wagtail.models import Page, GroupPagePermission
-# Remove the incorrect import and use the correct one if needed
-# from wagtail.core.permission_policies.pages import PagePermissionPolicy
+from wagtail.models import Page, GroupPagePermission, GroupCollectionPermission, Collection
+from wagtail.permission_policies.pages import PagePermissionPolicy
 
 User = get_user_model()
 
@@ -25,13 +24,19 @@ def create_user_groups():
     moderator_group, _ = Group.objects.get_or_create(name='Moderators')
     author_group, _ = Group.objects.get_or_create(name='Authors')
 
-    # Get content type for Page
+    # Get content type for Page and Collection
     page_content_type = ContentType.objects.get_for_model(Page)
+    collection_content_type = ContentType.objects.get_for_model(Collection)
+
+    # Get or create root collection
+    root_collection = Collection.objects.first()
+    if not root_collection:
+        root_collection = Collection.add_root(name='Root')
 
     # Define base permissions that exist in Django
     base_permissions = {
-        'editor': ['add_page', 'change_page', 'delete_page'],
-        'moderator': ['add_page', 'change_page'],
+        'editor': ['add_page', 'change_page', 'delete_page', 'publish_page'],
+        'moderator': ['add_page', 'change_page', 'publish_page'],
         'author': ['add_page', 'change_page']
     }
 
@@ -91,6 +96,30 @@ def create_user_groups():
             page=root_page,
             permission_type='edit'
         )
+        GroupPagePermission.objects.get_or_create(
+            group=author_group,
+            page=root_page,
+            permission_type='submit'
+        )
+
+    # Add collection permissions
+    collection_permissions = {
+        'editor': ['add', 'change', 'delete'],
+        'moderator': ['add', 'change'],
+        'author': ['add', 'change']
+    }
+
+    for group_name, perms in collection_permissions.items():
+        group = locals()[f"{group_name}_group"]
+        for perm_type in perms:
+            GroupCollectionPermission.objects.get_or_create(
+                group=group,
+                collection=root_collection,
+                permission=Permission.objects.get(
+                    codename=f"{perm_type}_image",
+                    content_type=ContentType.objects.get(app_label='wagtailimages', model='image')
+                )
+            )
 
     return editor_group, moderator_group, author_group
 
