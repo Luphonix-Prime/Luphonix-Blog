@@ -4,20 +4,17 @@ import django
 import sys
 from django.db.utils import IntegrityError
 from django.utils import timezone
-from django.contrib.auth.models import Permission, Group
-from django.contrib.contenttypes.models import ContentType
 
 # Set up Django environment
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'wagtail_app.settings')
+django.setup()  # Setup Django first
 
-try:
-    django.setup()
-except Exception as e:
-    print(f"Error setting up Django environment: {e}")
-    sys.exit(1)
-
+# Now import the models after Django is configured
+from django.contrib.auth.models import Permission, Group
+from django.contrib.contenttypes.models import ContentType
 from django.contrib.auth import get_user_model
 from wagtail.models import Page
+
 User = get_user_model()
 
 def create_user_groups():
