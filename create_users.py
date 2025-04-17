@@ -13,7 +13,8 @@ django.setup()  # Setup Django first
 from django.contrib.auth.models import Permission, Group
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.auth import get_user_model
-from wagtail.models import Page
+from wagtail.models import Page, GroupPagePermission
+from wagtail.core.permission_policies.pages import PagePermissionPolicy
 
 User = get_user_model()
 
@@ -23,43 +24,72 @@ def create_user_groups():
     moderator_group, _ = Group.objects.get_or_create(name='Moderators')
     author_group, _ = Group.objects.get_or_create(name='Authors')
 
-    # Get content type for BlogPage
+    # Get content type for Page
     page_content_type = ContentType.objects.get_for_model(Page)
 
-    # Define permissions for each group
-    editor_permissions = [
-        'add_page', 'change_page', 'delete_page', 'publish_page'
-    ]
-    
-    moderator_permissions = [
-        'add_page', 'change_page', 'moderate_page', 'publish_page'
-    ]
-    
-    author_permissions = [
-        'add_page', 'change_page', 'submit_page'
-    ]
+    # Define base permissions that exist in Django
+    base_permissions = {
+        'editor': ['add_page', 'change_page', 'delete_page'],
+        'moderator': ['add_page', 'change_page'],
+        'author': ['add_page', 'change_page']
+    }
 
-    # Assign permissions to groups
-    for perm in editor_permissions:
-        permission = Permission.objects.get(
-            codename=perm,
-            content_type=page_content_type,
-        )
-        editor_group.permissions.add(permission)
+    # Assign base permissions to groups
+    for group_name, perms in base_permissions.items():
+        group = locals()[f"{group_name}_group"]
+        for perm in perms:
+            try:
+                permission = Permission.objects.get(
+                    codename=perm,
+                    content_type=page_content_type,
+                )
+                group.permissions.add(permission)
+            except Permission.DoesNotExist:
+                print(f"Permission {perm} not found, skipping...")
 
-    for perm in moderator_permissions:
-        permission = Permission.objects.get(
-            codename=perm,
-            content_type=page_content_type,
+    # Add Wagtail specific group page permissions
+    root_page = Page.objects.first()
+    if root_page:
+        # Editor permissions
+        GroupPagePermission.objects.get_or_create(
+            group=editor_group,
+            page=root_page,
+            permission_type='add'
         )
-        moderator_group.permissions.add(permission)
+        GroupPagePermission.objects.get_or_create(
+            group=editor_group,
+            page=root_page,
+            permission_type='edit'
+        )
+        GroupPagePermission.objects.get_or_create(
+            group=editor_group,
+            page=root_page,
+            permission_type='publish'
+        )
 
-    for perm in author_permissions:
-        permission = Permission.objects.get(
-            codename=perm,
-            content_type=page_content_type,
+        # Moderator permissions
+        GroupPagePermission.objects.get_or_create(
+            group=moderator_group,
+            page=root_page,
+            permission_type='edit'
         )
-        author_group.permissions.add(permission)
+        GroupPagePermission.objects.get_or_create(
+            group=moderator_group,
+            page=root_page,
+            permission_type='publish'
+        )
+
+        # Author permissions
+        GroupPagePermission.objects.get_or_create(
+            group=author_group,
+            page=root_page,
+            permission_type='add'
+        )
+        GroupPagePermission.objects.get_or_create(
+            group=author_group,
+            page=root_page,
+            permission_type='edit'
+        )
 
     return editor_group, moderator_group, author_group
 
