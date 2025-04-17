@@ -33,11 +33,18 @@ def create_user_groups():
     if not root_collection:
         root_collection = Collection.add_root(name='Root')
 
-    # Define base permissions that exist in Django
+    # Update base permissions for authors
     base_permissions = {
         'editor': ['add_page', 'change_page', 'delete_page', 'publish_page'],
-        'moderator': ['add_page', 'change_page', 'publish_page'],
-        'author': ['add_page', 'change_page']
+        'moderator': [
+            'add_page', 
+            'change_page', 
+            'publish_page', 
+            'moderate_page',
+            'lock_page',
+            'unlock_page'
+        ],
+        'author': ['add_page', 'change_page', 'submit_for_moderation']
     }
 
     # Assign base permissions to groups
@@ -56,6 +63,38 @@ def create_user_groups():
     # Add Wagtail specific group page permissions
     root_page = Page.objects.first()
     if root_page:
+        # Get additional permissions for moderators
+        moderate_permission = Permission.objects.get(codename='moderate_page', content_type=page_content_type)
+        lock_permission = Permission.objects.get(codename='lock_page', content_type=page_content_type)
+        unlock_permission = Permission.objects.get(codename='unlock_page', content_type=page_content_type)
+
+        # Update Moderator permissions
+        GroupPagePermission.objects.get_or_create(
+            group=moderator_group,
+            page=root_page,
+            permission=edit_permission
+        )
+        GroupPagePermission.objects.get_or_create(
+            group=moderator_group,
+            page=root_page,
+            permission=publish_permission
+        )
+        GroupPagePermission.objects.get_or_create(
+            group=moderator_group,
+            page=root_page,
+            permission=moderate_permission
+        )
+        GroupPagePermission.objects.get_or_create(
+            group=moderator_group,
+            page=root_page,
+            permission=lock_permission
+        )
+        GroupPagePermission.objects.get_or_create(
+            group=moderator_group,
+            page=root_page,
+            permission=unlock_permission
+        )
+
         # Get permissions
         add_permission = Permission.objects.get(codename='add_page', content_type=page_content_type)
         edit_permission = Permission.objects.get(codename='change_page', content_type=page_content_type)
@@ -90,7 +129,7 @@ def create_user_groups():
             permission=publish_permission
         )
 
-        # Author permissions
+        # Update Author permissions
         GroupPagePermission.objects.get_or_create(
             group=author_group,
             page=root_page,
@@ -189,14 +228,16 @@ def create_regular_users():
             'email': 'user1@luphonix.com',
             'password': 'user1password',
             'first_name': 'Regular',
-            'last_name': 'User1'
+            'last_name': 'User1',
+            'is_staff': True  # Add this to allow admin access
         },
         {
             'username': 'user2',
             'email': 'user2@luphonix.com',
             'password': 'user2password',
             'first_name': 'Regular',
-            'last_name': 'User2'
+            'last_name': 'User2',
+            'is_staff': True  # Add this to allow admin access
         }
     ]
 
@@ -210,6 +251,14 @@ def create_regular_users():
                     **user_data
                 )
                 user.groups.add(author_group)
+                
+                # Add Wagtail admin access permission
+                wagtail_admin_access = Permission.objects.get(
+                    codename='access_admin',
+                    content_type=ContentType.objects.get(app_label='wagtailadmin', model='admin')
+                )
+                user.user_permissions.add(wagtail_admin_access)
+                
                 print(f"Regular user '{username}' created successfully!")
             else:
                 print(f"Regular user '{username}' already exists!")
