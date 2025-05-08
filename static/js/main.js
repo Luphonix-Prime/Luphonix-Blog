@@ -140,6 +140,7 @@ function initForms() {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
+                    'Cache-Control': 'no-cache' // Add this line
                 },
                 body: JSON.stringify(data),
             })
@@ -174,6 +175,7 @@ function initForms() {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
+                    'Cache-Control': 'no-cache' // Add this line
                 },
                 body: JSON.stringify(data),
             })
