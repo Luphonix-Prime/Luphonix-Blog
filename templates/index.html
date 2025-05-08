@@ -1,0 +1,242 @@
+{% extends "base.html" %}
+
+{% block title %}Home | luphonix-Blog{% endblock %}
+
+{% block content %}
+<!-- Hero Section -->
+<section class="hero-section">
+    <div class="container">
+        <div class="hero-content">
+            <h1 class="hero-title" data-animation="fade-up">{{ home_content.hero_title }}</h1>
+            <p class="hero-subtitle" data-animation="fade-up" data-delay="0.2">{{ home_content.hero_subtitle }}</p>
+            {% if home_content.hero_cta_text %}
+                <a href="{{ home_content.hero_cta_link }}" class="btn btn-primary btn-lg" data-animation="fade-up" data-delay="0.4">{{ home_content.hero_cta_text }}</a>
+            {% endif %}
+        </div>
+        <div class="hero-image" data-animation="fade-up" data-delay="0.3">
+            <img src="/static/img/hero-image.svg" alt="IT Solutions" class="img-fluid">
+        </div>
+    </div>
+    <div class="hero-shape-1"></div>
+    <div class="hero-shape-2"></div>
+</section>
+
+<!-- Intro Section -->
+<section class="intro-section section-padding bg-dark">
+    <div class="container">
+        <div class="section-intro text-center">
+            <h2 class="section-title" data-animation="fade-up">{{ home_content.intro_title }}</h2>
+            <div class="section-description" data-animation="fade-up" data-delay="0.2">
+                {{ home_content.intro_text|safe }}
+            </div>
+        </div>
+        
+        <!-- Stats -->
+        <div class="stats-grid">
+            <div class="stat-card" data-animation="fade-up" data-delay="0.1">
+                <div class="stat-icon"><i class="fas fa-users"></i></div>
+                <div class="stat-number counter" data-count="120">0</div>
+                <div class="stat-label">Happy Clients</div>
+            </div>
+            
+            <div class="stat-card" data-animation="fade-up" data-delay="0.2">
+                <div class="stat-icon"><i class="fas fa-laptop-code"></i></div>
+                <div class="stat-number counter" data-count="250">0</div>
+                <div class="stat-label">Projects Completed</div>
+            </div>
+            
+            <div class="stat-card" data-animation="fade-up" data-delay="0.3">
+                <div class="stat-icon"><i class="fas fa-award"></i></div>
+                <div class="stat-number counter" data-count="30">0</div>
+                <div class="stat-label">Awards Won</div>
+            </div>
+            
+            <div class="stat-card" data-animation="fade-up" data-delay="0.4">
+                <div class="stat-icon"><i class="fas fa-mug-hot"></i></div>
+                <div class="stat-number counter" data-count="15000">0</div>
+                <div class="stat-label">Cups of Coffee</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Features Section -->
+<section class="features-section section-padding">
+    <div class="container">
+        <div class="section-intro text-center">
+            <h2 class="section-title" data-animation="fade-up">{{ home_content.features_title }}</h2>
+        </div>
+        
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon"><i class="fas fa-code"></i></div>
+                <h3 class="feature-title">Clean Code</h3>
+                <p class="feature-description">We write maintainable, well-structured code following industry best practices and standards.</p>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon"><i class="fas fa-mobile-alt"></i></div>
+                <h3 class="feature-title">Responsive Design</h3>
+                <p class="feature-description">Our applications work perfectly on all devices, from desktops to smartphones.</p>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon"><i class="fas fa-tachometer-alt"></i></div>
+                <h3 class="feature-title">Performance Optimization</h3>
+                <p class="feature-description">We ensure our solutions are fast, efficient, and deliver a smooth user experience.</p>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon"><i class="fas fa-lock"></i></div>
+                <h3 class="feature-title">Security First</h3>
+                <p class="feature-description">Security is integral to our development process, not an afterthought.</p>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon"><i class="fas fa-cogs"></i></div>
+                <h3 class="feature-title">Scalable Solutions</h3>
+                <p class="feature-description">Our architecture is designed to grow with your business needs.</p>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon"><i class="fas fa-headset"></i></div>
+                <h3 class="feature-title">24/7 Support</h3>
+                <p class="feature-description">Our dedicated support team is always ready to address your concerns.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Services Section -->
+<section class="services-section section-padding bg-dark">
+    <div class="container">
+        <div class="section-intro text-center">
+            <h2 class="section-title" data-animation="fade-up">{{ home_content.services_title }}</h2>
+        </div>
+        
+        <div class="services-grid">
+            {% for service in services %}
+                <div class="service-card">
+                    <div class="service-icon"><i class="{{ service.icon }}"></i></div>
+                    <h3 class="service-title">{{ service.title }}</h3>
+                    <p class="service-description">{{ service.description }}</p>
+                    <a href="{{ service.link }}" class="service-link">Learn More <i class="fas fa-arrow-right"></i></a>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<!-- CTA Section -->
+<section class="cta-section section-padding">
+    <div class="container">
+        <h2 class="cta-title" data-animation="fade-up">Ready to Transform Your Business?</h2>
+        <p class="cta-description" data-animation="fade-up" data-delay="0.2">Let's discuss how our tech solutions can help your business grow and succeed in the digital landscape.</p>
+        <a href="/contact/" class="btn btn-primary btn-lg" data-animation="fade-up" data-delay="0.4">Get in Touch</a>
+    </div>
+</section>
+
+<!-- Blog Preview Section -->
+<section class="blog-preview-section section-padding bg-dark">
+    <div class="container">
+        <div class="section-intro text-center">
+            <h2 class="section-title" data-animation="fade-up">Latest Insights</h2>
+            <p class="section-description" data-animation="fade-up" data-delay="0.2">Explore our latest articles, tutorials, and insights on technology and business.</p>
+        </div>
+        
+        <div class="blog-grid">
+            {% for post in blog_posts %}
+                <div class="blog-card">
+                    <div class="blog-image">
+                        <a href="/blog/{{ post.slug }}/">
+                            <img src="/static/img/blog/post-{{ post.id }}.jpg" alt="{{ post.title }}" class="img-fluid">
+                        </a>
+                    </div>
+                    <div class="blog-content">
+                        <div class="blog-meta">
+                            <span class="blog-date"><i class="far fa-calendar-alt"></i> {{ post.date.strftime('%B %d, %Y') }}</span>
+                            {% if post.author %}
+                                <span class="blog-author"><i class="far fa-user"></i> {{ post.author.name }}</span>
+                            {% endif %}
+                        </div>
+                        <h3 class="blog-title"><a href="/blog/{{ post.slug }}/">{{ post.title }}</a></h3>
+                        <p class="blog-excerpt">{{ post.intro }}</p>
+                        <a href="/blog/{{ post.slug }}/" class="blog-link">Read More <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+        
+        <div class="text-center mt-5">
+            <a href="/blog/" class="btn btn-outline-primary btn-lg" data-animation="fade-up">View All Posts</a>
+        </div>
+    </div>
+</section>
+
+<!-- Testimonials Section -->
+<section class="testimonials-section section-padding">
+    <div class="container">
+        <div class="section-intro text-center">
+            <h2 class="section-title" data-animation="fade-up">What Our Clients Say</h2>
+        </div>
+        
+        <div class="testimonials-slider">
+            <div class="testimonial" data-animation="fade-up" data-delay="0.1">
+                <div class="testimonial-text">
+                    "Working with ITStartup was a game-changer for our business. Their team delivered a robust web application that exceeded our expectations and significantly improved our operational efficiency."
+                </div>
+                <div class="testimonial-author">
+                    <div class="testimonial-author-avatar">
+                        <img src="https://randomuser.me/api/portraits/women/67.jpg" alt="Sarah Johnson" class="img-fluid">
+                    </div>
+                    <div>
+                        <h4 class="testimonial-author-name">Sarah Johnson</h4>
+                        <p class="testimonial-author-role">COO, TechSolutions Inc.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="testimonial" data-animation="fade-up" data-delay="0.2">
+                <div class="testimonial-text">
+                    "The mobile app developed by ITStartup helped us reach a wider audience and streamline our customer service process. Their focus on user experience and attention to detail was impressive."
+                </div>
+                <div class="testimonial-author">
+                    <div class="testimonial-author-avatar">
+                        <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Michael Chen" class="img-fluid">
+                    </div>
+                    <div>
+                        <h4 class="testimonial-author-name">Michael Chen</h4>
+                        <p class="testimonial-author-role">CEO, InnovateCorp</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="testimonial" data-animation="fade-up" data-delay="0.3">
+                <div class="testimonial-text">
+                    "ITStartup's cloud migration service was seamless and professional. They ensured minimal disruption to our operations while significantly improving our system performance and reducing costs."
+                </div>
+                <div class="testimonial-author">
+                    <div class="testimonial-author-avatar">
+                        <img src="https://randomuser.me/api/portraits/women/45.jpg" alt="Emily Rodriguez" class="img-fluid">
+                    </div>
+                    <div>
+                        <h4 class="testimonial-author-name">Emily Rodriguez</h4>
+                        <p class="testimonial-author-role">CTO, GlobalTech</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    // Initialize testimonials slider if a carousel library is available
+    document.addEventListener('DOMContentLoaded', function() {
+        if (typeof initCarousel === 'function') {
+            initCarousel('.testimonials-slider');
+        }
+    });
+</script>
+{% endblock %}

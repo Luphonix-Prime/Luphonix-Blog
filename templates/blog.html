@@ -1,0 +1,160 @@
+{% extends "base.html" %}
+
+{% block title %}Blog | luphonix-Blog{% endblock %}
+
+{% block content %}
+<!-- Page Header -->
+<section class="page-header">
+    <div class="container">
+        <h1 class="page-title" data-animation="fade-up">Blog</h1>
+        <div class="breadcrumb">
+            <a href="/">Home</a> <span>&gt;</span> <span>Blog</span>
+        </div>
+    </div>
+    <div class="page-header-shape"></div>
+</section>
+
+<!-- Blog Section -->
+<section class="blog-section section-padding">
+    <div class="container">
+        <div class="row">
+            <!-- Main Content -->
+            <div class="col-lg-8">
+                <div class="section-intro">
+                    <h2 class="section-title" data-animation="fade-up">Latest Articles</h2>
+                    <p class="section-description" data-animation="fade-up" data-delay="0.2">
+                        Stay updated with our latest insights, tutorials, and thought leadership on technology and business.
+                    </p>
+                </div>
+                
+                <!-- Blog Post Grid -->
+                <div class="blog-grid">
+                    {% for post in posts %}
+                    <div class="blog-card" data-animation="fade-up" data-delay="{{ loop.index0 * 0.1 }}">
+                        <div class="blog-image">
+                            <a href="/blog/{{ post.slug }}/">
+                                {% if post.banner_image %}
+                                    <img src="{{ post.banner_image }}" alt="{{ post.title }}" class="img-fluid">
+                                {% else %}
+                                    <img src="/static/img/blog/post-{{ post.id }}.jpg" alt="{{ post.title }}" class="img-fluid">
+                                {% endif %}
+                            </a>
+                        </div>
+                        <div class="blog-content">
+                            <div class="blog-meta">
+                                <span class="blog-date"><i class="far fa-calendar-alt"></i> {{ post.date.strftime('%B %d, %Y') }}</span>
+                                {% if post.author %}
+                                    <span class="blog-author"><i class="far fa-user"></i> {{ post.author.name }}</span>
+                                {% endif %}
+                            </div>
+                            <h3 class="blog-title"><a href="/blog/{{ post.slug }}/">{{ post.title }}</a></h3>
+                            <p class="blog-excerpt">{{ post.intro }}</p>
+                            <div class="blog-footer">
+                                <div class="blog-categories">
+                                    {% for category in post.categories %}
+                                        <a href="/blog/?category={{ category }}" class="category-tag">{{ category }}</a>
+                                    {% endfor %}
+                                </div>
+                                <a href="/blog/{{ post.slug }}/" class="blog-link">Read More <i class="fas fa-arrow-right"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+                
+                <!-- Pagination -->
+                {% if total_pages > 1 %}
+                <div class="pagination-container" data-animation="fade-up">
+                    <ul class="pagination">
+                        {% if page > 1 %}
+                            <li class="page-item">
+                                <a class="page-link" href="/blog/?page={{ page - 1 }}&per_page={{ per_page }}" aria-label="Previous">
+                                    <i class="fas fa-chevron-left"></i>
+                                </a>
+                            </li>
+                        {% endif %}
+                        
+                        {% for p in range(1, total_pages + 1) %}
+                            <li class="page-item {% if p == page %}active{% endif %}">
+                                <a class="page-link" href="/blog/?page={{ p }}&per_page={{ per_page }}">{{ p }}</a>
+                            </li>
+                        {% endfor %}
+                        
+                        {% if page < total_pages %}
+                            <li class="page-item">
+                                <a class="page-link" href="/blog/?page={{ page + 1 }}&per_page={{ per_page }}" aria-label="Next">
+                                    <i class="fas fa-chevron-right"></i>
+                                </a>
+                            </li>
+                        {% endif %}
+                    </ul>
+                </div>
+                {% endif %}
+            </div>
+            
+            <!-- Sidebar -->
+            <div class="col-lg-4">
+                <div class="blog-sidebar">
+                    <!-- Search Widget -->
+                    <div class="sidebar-widget search-widget" data-animation="fade-up">
+                        <h3 class="widget-title">Search</h3>
+                        <form class="search-form" action="" method="get">
+                            <div class="form-group">
+                                <input type="text" name="search" placeholder="Search articles..." value="{{ search_query }}">
+                                <button type="submit"><i class="fas fa-search"></i></button>
+                            </div>
+                        </form>
+                    </div>
+                    
+                    <!-- Categories Widget -->
+                    <div class="sidebar-widget categories-widget" data-animation="fade-up" data-delay="0.1">
+                        <h3 class="widget-title">Categories</h3>
+                        <ul class="categories-list">
+                            {% for category in categories %}
+                                <li>
+                                    <a href="/blog/?category={{ category }}">
+                                        {{ category }}
+                                        <span class="count">({{ posts|selectattr('categories', 'contains', category)|list|length }})</span>
+                                    </a>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                    
+                    <!-- Popular Tags Widget -->
+                    <div class="sidebar-widget tags-widget" data-animation="fade-up" data-delay="0.2">
+                        <h3 class="widget-title">Popular Tags</h3>
+                        <div class="tags-cloud">
+                            {% for tag in popular_tags %}
+                                <a href="/blog/?tag={{ tag }}" class="tag">{{ tag }}</a>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    
+                    <!-- Newsletter Widget -->
+                    <div class="sidebar-widget newsletter-widget" data-animation="fade-up" data-delay="0.3">
+                        <h3 class="widget-title">Stay Updated</h3>
+                        <p>Subscribe to our newsletter to receive the latest articles and updates.</p>
+                        <form class="newsletter-form" action="/newsletter-signup/" method="post">
+                            <div class="form-group">
+                                <input type="email" name="email" placeholder="Your Email Address" required>
+                                <button type="submit" class="btn btn-primary">Subscribe</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- CTA Section -->
+<section class="cta-section section-padding bg-dark">
+    <div class="container">
+        <h2 class="cta-title" data-animation="fade-up">Ready to Start Your Project?</h2>
+        <p class="cta-description" data-animation="fade-up" data-delay="0.2">Let's discuss how we can help bring your ideas to life.</p>
+        <a href="/contact/" class="btn btn-primary btn-lg" data-animation="fade-up" data-delay="0.4">Get in Touch</a>
+    </div>
+    <div class="cta-shape"></div>
+</section>
+{% endblock %}

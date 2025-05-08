@@ -1,0 +1,151 @@
+/* Global Responsive Styles */
+@media (max-width: 1200px) {
+    .container {
+        max-width: 960px;
+    }
+}
+
+@media (max-width: 992px) {
+    .container {
+        max-width: 720px;
+    }
+
+    /* Grid System */
+    .row {
+        flex-direction: column;
+    }
+    
+    .col-lg-6 {
+        width: 100%;
+        margin-bottom: 30px;
+    }
+
+    /* Navigation */
+    .mobile-menu-toggle {
+        display: block;
+    }
+
+    nav ul {
+        display: none;
+        position: fixed;
+        top: 80px;
+        left: 0;
+        width: 100%;
+        background: #fff;
+        padding: 20px;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+
+    nav ul.active {
+        display: block;
+    }
+
+    nav ul li {
+        display: block;
+        margin: 15px 0;
+    }
+}
+
+@media (max-width: 768px) {
+    .container {
+        max-width: 540px;
+        padding: 0 15px;
+    }
+
+    /* Typography */
+    h1 { font-size: 2.5rem; }
+    h2 { font-size: 2rem; }
+    h3 { font-size: 1.75rem; }
+    h4 { font-size: 1.5rem; }
+
+    /* Sections */
+    .section-padding {
+        padding: 60px 0;
+    }
+
+    /* Hero Section */
+    .hero-section {
+        text-align: center;
+    }
+
+    .hero-image {
+        margin-top: 30px;
+    }
+
+    /* Features */
+    .feature-card {
+        margin-bottom: 30px;
+    }
+
+    /* Services */
+    .service-detail {
+        padding: 40px 0;
+    }
+
+    .service-image {
+        margin-bottom: 30px;
+    }
+
+    /* Contact */
+    .contact-card {
+        margin-bottom: 20px;
+    }
+
+    .contact-form-container {
+        padding: 20px;
+    }
+
+    /* Map */
+    .map-container iframe {
+        height: 300px;
+    }
+
+    /* FAQ */
+    .faq-item {
+        margin-bottom: 15px;
+    }
+}
+
+@media (max-width: 576px) {
+    /* Further adjustments for mobile */
+    .section-title {
+        font-size: 1.75rem;
+    }
+
+    .btn {
+        width: 100%;
+        margin: 10px 0;
+    }
+
+    /* Forms */
+    .form-group {
+        margin-bottom: 15px;
+    }
+
+    input, textarea {
+        padding: 10px;
+    }
+
+    /* Testimonials */
+    .testimonial {
+        padding: 15px;
+    }
+
+    .testimonial-author {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    /* Process Steps */
+    .process-step {
+        margin-bottom: 30px;
+    }
+}
+
+@media (max-width: 576px) {
+    .custom-section {
+        padding: 10px;
+        font-size: 1rem;
+        overflow-x: auto;
+    }
+}

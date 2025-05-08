@@ -1,0 +1,122 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Sign Up | Luphonix Blog{% endblock %}
+
+{% block content %}
+<section class="auth-section section-padding">
+    <div class="container">
+        <div class="auth-card">
+            <h2 class="auth-title">Create Your Account</h2>
+            
+            {% if form.errors %}
+                <div class="alert alert-danger">
+                    <strong>Please correct the following errors:</strong>
+                    <ul>
+                        {% for field in form %}
+                            {% for error in field.errors %}
+                                <li><strong>{{ field.label }}:</strong> {{ error }}</li>
+                            {% endfor %}
+                        {% endfor %}
+                        {% for error in form.non_field_errors %}
+                            <li>{{ error }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            {% endif %}
+            
+            {% if messages %}
+                {% for message in messages %}
+                    <div class="alert alert-{{ message.tags }}">{{ message }}</div>
+                {% endfor %}
+            {% endif %}
+            
+            <!-- Social Login Buttons -->
+           
+
+            <form method="post" class="auth-form" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="username">Username*</label>
+                    <input type="text" name="username" id="username" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email*</label>
+                    <input type="email" name="email" id="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="first_name">First Name*</label>
+                    <input type="text" name="first_name" id="first_name" required>
+                </div>
+                <div class="form-group">
+                    <label for="last_name">Last Name*</label>
+                    <input type="text" name="last_name" id="last_name" required>
+                </div>
+                <div class="form-group">
+                    <label for="password1">Password*</label>
+                    <div class="password-field">
+                        <input type="password" name="password1" id="password1" required>
+                        <span class="password-toggle" onclick="togglePasswordVisibility('password1')">
+                            <i class="fas fa-eye"></i>
+                        </span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="password2">Confirm Password*</label>
+                    <div class="password-field">
+                        <input type="password" name="password2" id="password2" required>
+                        <span class="password-toggle" onclick="togglePasswordVisibility('password2')">
+                            <i class="fas fa-eye"></i>
+                        </span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="profile-picture">Profile Picture*</label>
+                    <input type="file" id="profile-picture" name="profile_picture" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="bio">About You</label>
+                    <textarea name="bio" id="bio" rows="3"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="website">Website</label>
+                    <input type="url" name="website" id="website">
+                </div>
+                <div class="form-group">
+                    <label for="twitter">Twitter Profile</label>
+                    <input type="url" name="twitter" id="twitter">
+                </div>
+                <div class="form-group">
+                    <label for="linkedin">LinkedIn Profile</label>
+                    <input type="url" name="linkedin" id="linkedin">
+                </div>
+                <button type="submit" class="btn btn-primary">Sign Up</button>
+            </form>
+           
+            
+            
+            <p class="auth-link">Already have an account? <a href="{% url 'blog:login' %}">Login</a></p>
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    function togglePasswordVisibility(inputId) {
+        const passwordInput = document.getElementById(inputId);
+        const icon = document.querySelector(`#${inputId}`).nextElementSibling.querySelector('i');
+        
+        if (passwordInput.type === 'password') {
+            passwordInput.type = 'text';
+            icon.classList.remove('fa-eye');
+            icon.classList.add('fa-eye-slash');
+        } else {
+            passwordInput.type = 'password';
+            icon.classList.remove('fa-eye-slash');
+            icon.classList.add('fa-eye');
+        }
+    }
+</script>
+{% endblock %}
+

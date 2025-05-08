@@ -1,0 +1,302 @@
+{% extends "base.html" %}
+{% load wagtailcore_tags wagtailimages_tags %}
+
+{% block title %}Home | luphonix-Blog{% endblock %}
+
+{% block content %}
+<!-- Hero Section -->
+<section class="hero-section">
+    <div class="container">
+        <div class="hero-content">
+            <h1 class="hero-title" data-animation="fade-up">{{ page.hero_title }}</h1>
+            <p class="hero-subtitle" data-animation="fade-up" data-delay="0.2">{{ page.hero_subtitle }}</p>
+            {% if page.hero_cta_text %}
+                <a href="{{ page.hero_cta_link }}" class="btn btn-primary btn-lg" data-animation="fade-up" data-delay="0.4">{{ page.hero_cta_text }}</a>
+            {% endif %}
+        </div>
+        {% if page.hero_image %}
+            <div class="hero-image" data-animation="fade-up" data-delay="0.3">
+                {% image page.hero_image width-600 class="img-fluid" %}
+            </div>
+        {% endif %}
+    </div>
+    <div class="hero-shape-1"></div>
+    <div class="hero-shape-2"></div>
+</section>
+
+<!-- Intro Section -->
+<section class="intro-section section-padding bg-dark">
+    <div class="container">
+        <div class="section-intro text-center">
+            <h2 class="section-title" data-animation="fade-up">{{ page.intro_title }}</h2>
+            <div class="section-description" data-animation="fade-up" data-delay="0.2">
+                {{ page.intro_text|richtext }}
+            </div>
+        </div>
+        
+        <!-- Stats -->
+        <div class="stats-grid">
+            <div class="stat-card" data-animation="fade-up" data-delay="0.1">
+                <div class="stat-icon"><i class="fas fa-users"></i></div>
+                <div class="stat-number counter" data-count="120">0</div>
+                <div class="stat-label">Happy Clients</div>
+            </div>
+            
+            <div class="stat-card" data-animation="fade-up" data-delay="0.2">
+                <div class="stat-icon"><i class="fas fa-laptop-code"></i></div>
+                <div class="stat-number counter" data-count="250">0</div>
+                <div class="stat-label">Projects Completed</div>
+            </div>
+            
+            <div class="stat-card" data-animation="fade-up" data-delay="0.3">
+                <div class="stat-icon"><i class="fas fa-award"></i></div>
+                <div class="stat-number counter" data-count="30">0</div>
+                <div class="stat-label">Awards Won</div>
+            </div>
+            
+            <div class="stat-card" data-animation="fade-up" data-delay="0.4">
+                <div class="stat-icon"><i class="fas fa-mug-hot"></i></div>
+                <div class="stat-number counter" data-count="15000">0</div>
+                <div class="stat-label">Cups of Coffee</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Features Section -->
+<section class="features-section section-padding">
+    <div class="container">
+        <div class="section-intro text-center">
+            <h2 class="section-title" data-animation="fade-up">{{ page.features_title }}</h2>
+        </div>
+        
+        <div class="features-grid">
+            {% for block in page.features %}
+                <div class="feature-card">
+                    {% if block.value.icon %}
+                        <div class="feature-icon"><i class="{{ block.value.icon }}"></i></div>
+                    {% endif %}
+                    <h3 class="feature-title">{{ block.value.title }}</h3>
+                    <p class="feature-description">{{ block.value.description }}</p>
+                </div>
+            {% empty %}
+                <!-- Fallback for when no features are defined -->
+                <div class="feature-card">
+                    <div class="feature-icon"><i class="fas fa-code"></i></div>
+                    <h3 class="feature-title">Clean Code</h3>
+                    <p class="feature-description">We write maintainable, well-structured code following industry best practices and standards.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon"><i class="fas fa-mobile-alt"></i></div>
+                    <h3 class="feature-title">Responsive Design</h3>
+                    <p class="feature-description">Our applications work perfectly on all devices, from desktops to smartphones.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon"><i class="fas fa-tachometer-alt"></i></div>
+                    <h3 class="feature-title">Performance Optimization</h3>
+                    <p class="feature-description">We ensure our solutions are fast, efficient, and deliver a smooth user experience.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon"><i class="fas fa-lock"></i></div>
+                    <h3 class="feature-title">Security First</h3>
+                    <p class="feature-description">Security is integral to our development process, not an afterthought.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon"><i class="fas fa-cogs"></i></div>
+                    <h3 class="feature-title">Scalable Solutions</h3>
+                    <p class="feature-description">Our architecture is designed to grow with your business needs.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon"><i class="fas fa-headset"></i></div>
+                    <h3 class="feature-title">24/7 Support</h3>
+                    <p class="feature-description">Our dedicated support team is always ready to address your concerns.</p>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<!-- Services Section -->
+<section class="services-section section-padding bg-dark">
+    <div class="container">
+        <div class="section-intro text-center">
+            <h2 class="section-title" data-animation="fade-up">{{ page.services_title }}</h2>
+        </div>
+        
+        <div class="services-grid">
+            {% for block in page.services %}
+                <div class="service-card">
+                    {% if block.value.icon %}
+                        <div class="service-icon"><i class="{{ block.value.icon }}"></i></div>
+                    {% endif %}
+                    <h3 class="service-title">{{ block.value.title }}</h3>
+                    <p class="service-description">{{ block.value.description }}</p>
+                    {% if block.value.link %}
+                        <a href="{{ block.value.link }}" class="service-link">Learn More <i class="fas fa-arrow-right"></i></a>
+                    {% endif %}
+                </div>
+            {% empty %}
+                <!-- Fallback for when no services are defined -->
+                <div class="service-card">
+                    <div class="service-icon"><i class="fas fa-laptop-code"></i></div>
+                    <h3 class="service-title">Web Development</h3>
+                    <p class="service-description">Full-stack web application development using modern frameworks and technologies.</p>
+                    <a href="/services/#web-development" class="service-link">Learn More <i class="fas fa-arrow-right"></i></a>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-icon"><i class="fas fa-mobile-alt"></i></div>
+                    <h3 class="service-title">Mobile Applications</h3>
+                    <p class="service-description">Native and cross-platform mobile app development for iOS and Android.</p>
+                    <a href="/services/#mobile-apps" class="service-link">Learn More <i class="fas fa-arrow-right"></i></a>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-icon"><i class="fas fa-cloud"></i></div>
+                    <h3 class="service-title">Cloud Services</h3>
+                    <p class="service-description">Cloud strategy, migration, and managed services on AWS, Azure, and Google Cloud.</p>
+                    <a href="/services/#cloud-services" class="service-link">Learn More <i class="fas fa-arrow-right"></i></a>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<!-- CTA Section -->
+{% for block in page.cta %}
+    <section class="cta-section section-padding" style="background-color: {{ block.value.background_color }};">
+        <div class="container">
+            <h2 class="cta-title" data-animation="fade-up">{{ block.value.heading }}</h2>
+            {% if block.value.subheading %}
+                <p class="cta-description" data-animation="fade-up" data-delay="0.2">{{ block.value.subheading }}</p>
+            {% endif %}
+            <a href="{{ block.value.button_link }}" class="btn btn-primary btn-lg" data-animation="fade-up" data-delay="0.4">{{ block.value.button_text }}</a>
+        </div>
+    </section>
+{% empty %}
+    <!-- Fallback CTA -->
+    <section class="cta-section section-padding">
+        <div class="container">
+            <h2 class="cta-title" data-animation="fade-up">Ready to Transform Your Business?</h2>
+            <p class="cta-description" data-animation="fade-up" data-delay="0.2">Let's discuss how our tech solutions can help your business grow and succeed in the digital landscape.</p>
+            <a href="/contact/" class="btn btn-primary btn-lg" data-animation="fade-up" data-delay="0.4">Get in Touch</a>
+        </div>
+    </section>
+{% endfor %}
+
+<!-- Blog Preview Section -->
+<section class="blog-preview-section section-padding bg-dark">
+    <div class="container">
+        <div class="section-intro text-center">
+            <h2 class="section-title" data-animation="fade-up">Latest Insights</h2>
+            <p class="section-description" data-animation="fade-up" data-delay="0.2">Explore our latest articles, tutorials, and insights on technology and business.</p>
+        </div>
+        
+        <div class="blog-grid">
+            {% for post in blog_posts %}
+                <div class="blog-card">
+                    {% if post.specific.banner_image %}
+                        <div class="blog-image">
+                            {% image post.specific.banner_image fill-400x250 as img %}
+                            <a href="{% pageurl post %}">
+                                <img src="{{ img.url }}" alt="{{ post.title }}" class="img-fluid">
+                            </a>
+                        </div>
+                    {% endif %}
+                    <div class="blog-content">
+                        <div class="blog-meta">
+                            <span class="blog-date"><i class="far fa-calendar-alt"></i> {{ post.specific.date|date:"F j, Y" }}</span>
+                            {% if post.specific.author %}
+                                <span class="blog-author"><i class="far fa-user"></i> {{ post.specific.author.name }}</span>
+                            {% endif %}
+                        </div>
+                        <h3 class="blog-title"><a href="{% pageurl post %}">{{ post.title }}</a></h3>
+                        <p class="blog-excerpt">{{ post.specific.intro|truncatewords:20 }}</p>
+                        <a href="{% pageurl post %}" class="blog-link">Read More <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+            {% empty %}
+                <div class="col-12 text-center">
+                    <p>No blog posts available yet. Check back soon!</p>
+                </div>
+            {% endfor %}
+        </div>
+        
+        <div class="text-center mt-5">
+            <a href="/blog/" class="btn btn-outline-primary btn-lg" data-animation="fade-up">View All Posts</a>
+        </div>
+    </div>
+</section>
+
+<!-- Testimonials Section -->
+<section class="testimonials-section section-padding">
+    <div class="container">
+        <div class="section-intro text-center">
+            <h2 class="section-title" data-animation="fade-up">What Our Team Say</h2>
+        </div>
+        
+        <div class="testimonials-slider">
+            <div class="testimonial" data-animation="fade-up" data-delay="0.1">
+                <div class="testimonial-text">
+                    "My goal is to make sure your product not only looks great but is also easy and intuitive for users to interact with. I focus on creating interfaces that are visually consistent, responsive across devices, and aligned with your brand identity."
+                </div>
+                <div class="testimonial-author">
+                    <div class="testimonial-author-avatar">
+                        <img src="/media/images/WhatsApp Image 2025-05-05 at 13.04.52_b1af95fc.jpg" alt="Sarah Johnson" class="img-fluid">
+                    </div>
+                    <div>
+                        <h4 class="testimonial-author-name">Nisarg Patel</h4>
+                        <p class="testimonial-author-role">UI/UX Designer.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="testimonial" data-animation="fade-up" data-delay="0.2">
+                <div class="testimonial-text">
+                    "My role is to make sure everything users see and interact with is smooth, intuitive, and works flawlessly across devices and browsers. I collaborate closely with UI/UX designers and backend developers to ensure the product not only looks good but performs well."
+                </div>
+                <div class="testimonial-author">
+                    <div class="testimonial-author-avatar">
+                        <img src="/media/images/WhatsApp Image 2025-05-05 at 13.04.59_122cdd4a.jpg" alt="Michael Chen" class="img-fluid">
+                    </div>
+                    <div>
+                        <h4 class="testimonial-author-name">Kaushal Patel</h4>
+                        <p class="testimonial-author-role">Front-end Developer</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="testimonial" data-animation="fade-up" data-delay="0.3">
+                <div class="testimonial-text">
+                    "Whether it's designing robust database schemas, developing RESTful or GraphQL APIs, or integrating third-party services, I work behind the scenes to make sure the user experience is supported by a fast, stable, and secure infrastructure. I also handle user authentication, data storage, and performance optimization to keep everything running smoothly."
+                </div>
+                <div class="testimonial-author">
+                    <div class="testimonial-author-avatar">
+                        <img src="/media/images/ME_GIBLI.png" alt="Emily Rodriguez" class="img-fluid">
+                    </div>
+                    <div>
+                        <h4 class="testimonial-author-name">Keval Patel</h4>
+                        <p class="testimonial-author-role">backend Developer</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    // Initialize testimonials slider if a carousel library is available
+    document.addEventListener('DOMContentLoaded', function() {
+        if (typeof initCarousel === 'function') {
+            initCarousel('.testimonials-slider');
+        }
+    });
+</script>
+{% endblock %}

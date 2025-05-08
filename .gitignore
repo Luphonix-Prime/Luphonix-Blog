@@ -1,0 +1,8 @@
+    /wagtail_app/__pycache__
+/wagtail_app/home/__pycache__
+/wagtail_app/blog/__pycache__
+__pycache__
+
+
+.env
+.vscode/

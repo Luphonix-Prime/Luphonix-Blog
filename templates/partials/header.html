@@ -1,0 +1,30 @@
+<header>
+    <div class="container header-container">
+        <a href="/" class="logo">
+            <span>Tech</span>Vision
+        </a>
+        
+        <nav class="main-nav">
+            <button class="mobile-menu-toggle" aria-label="Toggle mobile menu">
+                <i class="fas fa-bars"></i>
+            </button>
+            <ul class="nav-list">
+                <li class="nav-item">
+                    <a href="/" class="nav-link {% if request.path == '/' %}active{% endif %}">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a href="/blog/" class="nav-link {% if '/blog/' in request.path %}active{% endif %}">Blog</a>
+                </li>
+                <li class="nav-item">
+                    <a href="/admin/" class="nav-link {% if request.path == '/admin/' %}active{% endif %}">Wagtail</a>
+                </li>
+                <li class="nav-item">
+                    <a href="{% url 'wagtailadmin_login' %}" class="nav-link ls-one">Login</a>
+                </li>
+                <li class="nav-item">
+                    <a href="/blog/signup/" class="nav-link ls-one">Sign Up</a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+</header>

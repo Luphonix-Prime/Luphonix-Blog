@@ -1,0 +1,18 @@
+[project]
+name = "Luphonix-blog-workspace"
+version = "0.1.0"
+description = "Add your description here"
+requires-python = ">=3.11"
+dependencies = [
+    "django-modelcluster>=6.4",
+    "django>=5.1.7",
+    "email-validator>=2.2.0",
+    "flask>=3.1.0",
+    "flask-sqlalchemy>=3.1.1",
+    "gunicorn>=23.0.0",
+    "psycopg2-binary>=2.9.10",
+    "python-dotenv>=1.1.0",
+    "requests>=2.32.3",
+    "wagtail>=6.4.1",
+    "django-taggit>=6.1.0",
+]

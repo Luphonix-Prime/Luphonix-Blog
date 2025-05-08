@@ -1,0 +1,246 @@
+{% load static %}
+{% load static wagtailuserbar %}
+{% load wagtailimages_tags %}
+{% load wagtailcore_tags %}
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>{% block title %}luphonix-Blog Blog{% endblock %}</title>
+
+    <!-- Favicon -->
+    <link rel="icon" href="/static/favicon.ico" type="image/x-icon">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Syntax Highlighting -->
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/atom-one-dark.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'css/animations.css' %}">
+    <link rel="stylesheet" href="{% static 'css/theme.css' %}">
+    <!-- <script src="/static/js/initMobileMenu.js"></script> -->
+    <!-- Add in the head section -->
+    <!-- <link rel="stylesheet" href="/static/css/dark-mode.css"> -->
+    <!-- Add before closing body tag -->
+    <!-- <script src="/static/js/dark-mode.js"></script> -->
+</head>
+
+<body>
+    <div class="page-wrapper">
+        <!-- Header -->
+        <header class="site-header">
+            <div class="container">
+                <div class="header-inner">
+                    <div class="logo">
+                        <a href="/luphonix/" class="logo-text">Luphonix<span class="text-primary">Blog</span></a>
+                    </div>
+
+
+
+                    <div class="header-actions">
+
+                        <!-- <a href="/blog/login/" class="nav-link">Login</a>
+                        <a href="/blog/signup/" class="btn btn-primary">Sign Up</a> -->
+                        <nav class="main-nav">
+                            <button class="mobile-menu-toggle" aria-label="Toggle mobile menu">
+                                <i class="fas fa-bars"></i>
+                            </button>
+                            <ul class="nav-list">
+                                <li class="nav-item">
+                                    <a href="/" class="nav-link {% if request.path == '/' %}active{% endif %}">Home</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="/blog/"
+                                        class="nav-link {% if '/blog/' in request.path %}active{% endif %}">Blog</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="/admin/"
+                                        class="nav-link {% if request.path == '/admin/' %}active{% endif %}">Wagtail</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="{% url 'wagtailadmin_login' %}" class="nav-link ls-one">Login</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="/blog/signup/" class="nav-link ls-one">Sign Up</a>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+                    <div>
+                    {% if request.user.is_authenticated %}
+                            <span class="user-name">{{ request.user.get_full_name|default:request.user.username }}</span>
+                            <a href="{% url 'blog:logout' %}" class="btn btn-outline-primary">Logout</a>
+                        {% else %}
+                            <a href="{% url 'wagtailadmin_login' %}" class="btn btn-outline-primary ls-two">Login</a>
+                            <a href="/blog/signup/" class="btn btn-primary ls-two">Sign Up</a>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="site-main">
+            <!-- Flash Messages -->
+            {% if messages %}
+            <div class="notification-container">
+                {% for message in messages %}
+                <div class="notification {% if message.tags %}{{ message.tags }}{% endif %}">
+                    <div class="notification-content">{{ message }}</div>
+                    <button class="notification-close" aria-label="Close">&times;</button>
+                </div>
+                {% endfor %}
+            </div>
+            {% endif %}
+
+            {% block content %}{% endblock %}
+        </main>
+
+        <!-- Footer -->
+        <footer class="site-footer">
+            <div class="container">
+                <div class="footer-top">
+                    <div class="footer-col">
+                        <div class="logo">
+                            <a href="/" class="logo-text">Luphonix<span class="text-primary">Blog</span></a>
+                        </div>
+                        <p class="footer-about">
+                            We're a passionate team of tech enthusiasts dedicated to helping businesses thrive in the
+                            digital era.
+                        </p>
+                        <div class="social-links">
+                            <a href="/twitter/" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                            <a href="/linkedin/" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="/github/" aria-label="GitHub"><i class="fab fa-github"></i></a>
+                            <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        </div>
+                    </div>
+
+                    <div class="footer-col">
+                        <h5 class="footer-heading">Quick Links</h5>
+                        <ul class="footer-links">
+                            <li><a href="/luphonix/">Home</a></li>
+                            <li><a href="/team/">Team</a></li>
+                            <li><a href="/technologies/">Technologies</a></li>
+                            <li><a href="/project/">Projects</a></li>
+                            <li><a href="/contact/">Contact</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="footer-col">
+                        <h5 class="footer-heading">Services</h5>
+                        <ul class="footer-links">
+                            <li><a href="/services/#web-development">Web Development</a></li>
+                            <li><a href="/services/#mobile-apps">Mobile Applications</a></li>
+                            <li><a href="/services/#cloud-services">Cloud Services</a></li>
+                            <li><a href="/services/#ai-ml">AI & Machine Learning</a></li>
+                            <li><a href="/services/#it-consulting">IT Consulting</a></li>
+                            <li><a href="/services/#cybersecurity">Cybersecurity</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="footer-col">
+                        <h5 class="footer-heading">Newsletter</h5>
+                        <p>Subscribe to our newsletter to receive updates and valuable tech insights.</p>
+
+                        <form class="newsletter-form" action="/newsletter-signup/" method="post">
+                            <div class="form-group">
+                                <input type="email" name="email" placeholder="Your Email Address" required>
+                                <button type="submit" class="btn btn-primary">Subscribe</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <div class="footer-bottom">
+                    <p class="copyright">&copy; {{ now.year }} ITStartup. All Rights Reserved.</p>
+                    <ul class="footer-legal">
+                        <li><a href="/privacy-policy/">Privacy Policy</a></li>
+                        <li><a href="/terms-of-service/">Terms of Service</a></li>
+                        <li><a href="/sitemap/">Sitemap</a></li>
+                    </ul>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <!-- JavaScript Libraries -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+
+    <!-- Custom JavaScript -->
+    <script src="/static/js/main.js"></script>
+    <script src="/static/js/animations.js"></script>
+    <!-- <script src="/static/js/theme.js"></script> -->
+
+    <!-- Initialize Scripts -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Initialize main functionality
+            if (typeof initNavigation === 'function') initNavigation();
+            if (typeof initScrollEffects === 'function') initScrollEffects();
+            if (typeof initForms === 'function') initForms();
+            if (typeof initLazyLoading === 'function') initLazyLoading();
+
+            // Initialize animations
+            if (typeof initScrollReveal === 'function') initScrollReveal();
+            if (typeof initLetterAnimations === 'function') initLetterAnimations();
+            if (typeof initTypingEffect === 'function') initTypingEffect();
+            if (typeof initSVGAnimations === 'function') initSVGAnimations();
+            if (typeof initSmoothScrolling === 'function') initSmoothScrolling();
+            if (typeof initTextScramble === 'function') initTextScramble();
+
+            // Advanced effects (optional)
+            if (typeof initParallax === 'function') initParallax();
+            if (typeof initCounters === 'function') initCounters();
+            if (typeof initCustomCursor === 'function') initCustomCursor();
+            if (typeof initPageTransitions === 'function') initPageTransitions();
+
+            // Initialize syntax highlighting
+            if (typeof hljs !== 'undefined') {
+                hljs.highlightAll();
+            }
+
+            // Initialize grid animations
+            document.querySelectorAll('.features-grid, .services-grid, .blog-grid, .team-grid').forEach(grid => {
+                if (typeof animateGrid === 'function') animateGrid('.' + grid.className.split(' ')[0]);
+            });
+
+            // Add click event listeners to notification close buttons
+            document.querySelectorAll('.notification-close').forEach(button => {
+                button.addEventListener('click', function () {
+                    const notification = this.closest('.notification');
+                    notification.classList.add('closing');
+                    setTimeout(() => {
+                        notification.remove();
+                    }, 300);
+                });
+            });
+        });
+    </script>
+
+    {% block extra_js %}{% endblock %}
+    <!-- Add before closing body tag -->
+    <script src="/static/js/mobile-menu.js"></script>
+</body>
+<!-- Floating Button -->
+<div class="floating-button">
+    <a href="/add-post">
+        <i class="fa-sharp-duotone fa-solid fa-feather-pointed" style="color: #fff;"></i>
+    </a>
+</div>
+
+</html>

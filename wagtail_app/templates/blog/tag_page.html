@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+{% load wagtailcore_tags wagtailimages_tags %}
+
+{% block title %}Posts tagged with "{{ tag.name }}" | luphonix-Blog{% endblock %}
+
+{% block content %}
+<section class="page-header">
+    <div class="container">
+        <div class="page-header-content">
+            <h1 class="page-title" data-animation="fade-up">Posts tagged with "{{ tag.name }}"</h1>
+        </div>
+    </div>
+    <div class="page-header-shape"></div>
+</section>
+
+<section class="blog-listing section-padding">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8">
+                <div class="blog-posts">
+                    {% for post in posts %}
+                        <div class="blog-card" data-animation="fade-up" data-delay="{{ forloop.counter0 }}00ms">
+                            {% if post.banner_image %}
+                                <div class="blog-image">
+                                    {% image post.banner_image fill-800x450 as banner %}
+                                    <a href="{% pageurl post %}">
+                                        <img src="{{ banner.url }}" alt="{{ post.title }}" class="img-fluid">
+                                    </a>
+                                </div>
+                            {% endif %}
+                            <div class="blog-content">
+                                <div class="blog-meta">
+                                    <span class="blog-date"><i class="far fa-calendar-alt"></i> {{ post.date|date:"F j, Y" }}</span>
+                                    {% if post.author %}
+                                        <span class="blog-author"><i class="far fa-user"></i> {{ post.author.name }}</span>
+                                    {% endif %}
+                                </div>
+                                <h3 class="blog-title"><a href="{% pageurl post %}">{{ post.title }}</a></h3>
+                                <p class="blog-excerpt">{{ post.intro }}</p>
+                                <a href="{% pageurl post %}" class="blog-link">Read More <i class="fas fa-arrow-right"></i></a>
+                            </div>
+                        </div>
+                    {% empty %}
+                        <div class="no-posts" data-animation="fade-up">
+                            <h3>No posts found</h3>
+                            <p>There are no posts with this tag yet.</p>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

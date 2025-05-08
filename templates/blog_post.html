@@ -1,0 +1,273 @@
+{% extends "base.html" %}
+
+{% block title %}{{ post.title }} | luphonix-Blog Blog{% endblock %}
+
+{% block content %}
+<!-- Page Header -->
+<section class="page-header blog-header">
+    <div class="container">
+        <div class="breadcrumb">
+            <a href="/">Home</a> <span>&gt;</span> <a href="/blog/">Blog</a> <span>&gt;</span> <span>{{ post.title }}</span>
+        </div>
+    </div>
+    <div class="page-header-shape"></div>
+</section>
+
+<!-- Blog Post Section -->
+<section class="blog-post-section section-padding">
+    <div class="container">
+        <div class="row">
+            <!-- Main Content -->
+            <div class="col-lg-8">
+                <article class="blog-post-content">
+                    <!-- Post Header -->
+                    <header class="post-header">
+                        <h1 class="post-title" data-animation="fade-up">{{ post.title }}</h1>
+                        <div class="post-meta" data-animation="fade-up" data-delay="0.1">
+                            <span class="post-date"><i class="far fa-calendar-alt"></i> {{ post.date.strftime('%B %d, %Y') }}</span>
+                            {% if post.author %}
+                                <span class="post-author"><i class="far fa-user"></i> {{ post.author.name }}</span>
+                            {% endif %}
+                            
+                            <div class="post-categories">
+                                {% for category in post.categories %}
+                                    <a href="/blog/?category={{ category }}" class="category-tag">{{ category }}</a>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </header>
+                    
+                    <!-- Featured Image -->
+                    {% if post.banner_image %}
+                        <div class="post-featured-image" data-animation="fade-up" data-delay="0.2">
+                            <img src="{{ post.banner_image }}" alt="{{ post.title }}" class="img-fluid">
+                        </div>
+                    {% else %}
+                        <div class="post-featured-image" data-animation="fade-up" data-delay="0.2">
+                            <img src="/static/img/blog/post-{{ post.id }}.jpg" alt="{{ post.title }}" class="img-fluid">
+                        </div>
+                    {% endif %}
+                    
+                    <!-- Post Intro -->
+                    <div class="post-intro" data-animation="fade-up" data-delay="0.3">
+                        <p>{{ post.intro }}</p>
+                    </div>
+                    
+                    <!-- Post Content -->
+                    <div class="post-body" data-animation="fade-up" data-delay="0.4">
+                        {% for block_type, block_content in post.body %}
+                            {% if block_type == 'heading' %}
+                                <h2>{{ block_content }}</h2>
+                            {% elif block_type == 'paragraph' %}
+                                {{ block_content|safe }}
+                            {% elif block_type == 'code' %}
+                                <div class="code-block">
+                                    <div class="code-header">
+                                        <span class="code-language">{{ block_content.language }}</span>
+                                        <button class="code-copy-btn" data-clipboard-target="#code-{{ loop.index }}">
+                                            <i class="far fa-copy"></i>
+                                        </button>
+                                    </div>
+                                    <pre><code id="code-{{ loop.index }}" class="language-{{ block_content.language }}">{{ block_content.code }}</code></pre>
+                                </div>
+                            {% elif block_type == 'image' %}
+                                <figure class="post-image">
+                                    <img src="{{ block_content.image }}" alt="{{ block_content.caption or 'Blog image' }}" class="img-fluid">
+                                    {% if block_content.caption %}
+                                        <figcaption>{{ block_content.caption }}</figcaption>
+                                    {% endif %}
+                                </figure>
+                            {% elif block_type == 'raw_html' %}
+                                {{ block_content|safe }}
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                    
+                    <!-- Post Tags -->
+                    {% if post.tags %}
+                        <div class="post-tags" data-animation="fade-up" data-delay="0.5">
+                            <span class="tags-label">Tags:</span>
+                            <div class="tags-list">
+                                {% for tag in post.tags %}
+                                    <a href="/blog/?tag={{ tag }}" class="tag">{{ tag }}</a>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    {% endif %}
+                    
+                    <!-- Author Bio -->
+                    {% if post.author %}
+                        <div class="author-bio" data-animation="fade-up" data-delay="0.6">
+                            <div class="author-image">
+                                {% if post.author.photo %}
+                                    <img src="{{ post.author.photo }}" alt="{{ post.author.name }}" class="img-fluid">
+                                {% else %}
+                                    <div class="author-image-placeholder">
+                                        <i class="fas fa-user"></i>
+                                    </div>
+                                {% endif %}
+                            </div>
+                            <div class="author-content">
+                                <h3 class="author-name">{{ post.author.name }}</h3>
+                                <p class="author-description">{{ post.author.bio }}</p>
+                            </div>
+                        </div>
+                    {% endif %}
+                    
+                    <!-- Share Post -->
+                    <div class="post-share" data-animation="fade-up" data-delay="0.7">
+                        <h3 class="share-title">Share This Post</h3>
+                        <div class="share-buttons">
+                            <a href="https://twitter.com/intent/tweet?url={{ request.url }}&text={{ post.title }}" target="_blank" rel="noopener noreferrer" aria-label="Share on Twitter">
+                                <i class="fab fa-twitter"></i>
+                            </a>
+                            <a href="https://www.facebook.com/sharer/sharer.php?u={{ request.url }}" target="_blank" rel="noopener noreferrer" aria-label="Share on Facebook">
+                                <i class="fab fa-facebook-f"></i>
+                            </a>
+                            <a href="https://www.linkedin.com/shareArticle?mini=true&url={{ request.url }}&title={{ post.title }}" target="_blank" rel="noopener noreferrer" aria-label="Share on LinkedIn">
+                                <i class="fab fa-linkedin-in"></i>
+                            </a>
+                            <a href="mailto:?subject={{ post.title }}&body={{ post.intro }}%0A%0A{{ request.url }}" aria-label="Share via Email">
+                                <i class="fas fa-envelope"></i>
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <!-- Related Posts -->
+                    {% if related_posts %}
+                        <div class="related-posts" data-animation="fade-up" data-delay="0.8">
+                            <h3 class="related-title">You May Also Like</h3>
+                            <div class="related-posts-grid">
+                                {% for related in related_posts %}
+                                    <div class="related-post-card">
+                                        <div class="related-post-image">
+                                            <a href="/blog/{{ related.slug }}/">
+                                                {% if related.banner_image %}
+                                                    <img src="{{ related.banner_image }}" alt="{{ related.title }}" class="img-fluid">
+                                                {% else %}
+                                                    <img src="/static/img/blog/post-{{ related.id }}.jpg" alt="{{ related.title }}" class="img-fluid">
+                                                {% endif %}
+                                            </a>
+                                        </div>
+                                        <div class="related-post-content">
+                                            <h4 class="related-post-title">
+                                                <a href="/blog/{{ related.slug }}/">{{ related.title }}</a>
+                                            </h4>
+                                            <div class="related-post-meta">
+                                                <span class="related-post-date">{{ related.date.strftime('%B %d, %Y') }}</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    {% endif %}
+                </article>
+            </div>
+            
+            <!-- Sidebar -->
+            <div class="col-lg-4">
+                <div class="blog-sidebar">
+                    <!-- Search Widget -->
+                    <div class="sidebar-widget search-widget" data-animation="fade-up">
+                        <h3 class="widget-title">Search</h3>
+                        <form class="search-form" action="/blog/" method="get">
+                            <div class="form-group">
+                                <input type="text" name="search" placeholder="Search articles...">
+                                <button type="submit"><i class="fas fa-search"></i></button>
+                            </div>
+                        </form>
+                    </div>
+                    
+                    <!-- Recent Posts Widget -->
+                    <div class="sidebar-widget recent-posts-widget" data-animation="fade-up" data-delay="0.1">
+                        <h3 class="widget-title">Recent Posts</h3>
+                        <ul class="recent-posts-list">
+                            {% for recent in recent_posts %}
+                                <li class="recent-post-item">
+                                    <div class="recent-post-image">
+                                        <a href="/blog/{{ recent.slug }}/">
+                                            {% if recent.banner_image %}
+                                                <img src="{{ recent.banner_image }}" alt="{{ recent.title }}" class="img-fluid">
+                                            {% else %}
+                                                <img src="/static/img/blog/post-{{ recent.id }}.jpg" alt="{{ recent.title }}" class="img-fluid">
+                                            {% endif %}
+                                        </a>
+                                    </div>
+                                    <div class="recent-post-content">
+                                        <h4 class="recent-post-title">
+                                            <a href="/blog/{{ recent.slug }}/">{{ recent.title }}</a>
+                                        </h4>
+                                        <div class="recent-post-meta">
+                                            <span class="recent-post-date">{{ recent.date.strftime('%B %d, %Y') }}</span>
+                                        </div>
+                                    </div>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                    
+                    <!-- Categories Widget -->
+                    <div class="sidebar-widget categories-widget" data-animation="fade-up" data-delay="0.2">
+                        <h3 class="widget-title">Categories</h3>
+                        <ul class="categories-list">
+                            {% for category in categories %}
+                                <li>
+                                    <a href="/blog/?category={{ category }}">
+                                        {{ category }}
+                                    </a>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                    
+                    <!-- Popular Tags Widget -->
+                    <div class="sidebar-widget tags-widget" data-animation="fade-up" data-delay="0.3">
+                        <h3 class="widget-title">Popular Tags</h3>
+                        <div class="tags-cloud">
+                            {% for tag in popular_tags %}
+                                <a href="/blog/?tag={{ tag }}" class="tag">{{ tag }}</a>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    
+                    <!-- Newsletter Widget -->
+                    <div class="sidebar-widget newsletter-widget" data-animation="fade-up" data-delay="0.4">
+                        <h3 class="widget-title">Stay Updated</h3>
+                        <p>Subscribe to our newsletter to receive the latest articles and updates.</p>
+                        <form class="newsletter-form" action="/newsletter-signup/" method="post">
+                            <div class="form-group">
+                                <input type="email" name="email" placeholder="Your Email Address" required>
+                                <button type="submit" class="btn btn-primary">Subscribe</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+{% block extra_js %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.11/clipboard.min.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Initialize code copy functionality
+        if (typeof ClipboardJS !== 'undefined') {
+            new ClipboardJS('.code-copy-btn');
+            
+            // Add copy feedback
+            document.querySelectorAll('.code-copy-btn').forEach(button => {
+                button.addEventListener('click', function() {
+                    const originalText = this.innerHTML;
+                    this.innerHTML = '<i class="fas fa-check"></i>';
+                    setTimeout(() => {
+                        this.innerHTML = originalText;
+                    }, 2000);
+                });
+            });
+        }
+    });
+</script>
+{% endblock %}

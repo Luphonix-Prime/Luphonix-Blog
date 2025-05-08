@@ -1,0 +1,256 @@
+{% extends "base.html" %}
+
+{% block title %}Contact Us | luphonix-Blog{% endblock %}
+
+{% block content %}
+<!-- Page Header -->
+<section class="page-header">
+    <div class="container">
+        <h1 class="page-title" data-animation="fade-up">Contact Us</h1>
+        <div class="breadcrumb">
+            <a href="/">Home</a> <span>&gt;</span> <span>Contact</span>
+        </div>
+    </div>
+    <div class="page-header-shape"></div>
+</section>
+
+<!-- Contact Info Section -->
+<section class="contact-info-section section-padding">
+    <div class="container">
+        <div class="section-intro text-center">
+            <h2 class="section-title" data-animation="fade-up">Get In Touch</h2>
+            <p class="section-description" data-animation="fade-up" data-delay="0.2">
+                Have a question, project idea, or want to discuss a potential collaboration? We'd love to hear from you. Reach out to us using any of the methods below.
+            </p>
+        </div>
+        
+        <div class="contact-cards">
+            <div class="contact-card" data-animation="fade-up" data-delay="0.1">
+                <div class="contact-icon"><i class="fas fa-envelope"></i></div>
+                <h3 class="contact-title">Email Us</h3>
+                <p class="contact-detail"><a href="mailto:info@itstartup.com">info@itstartup.com</a></p>
+                <p class="contact-description">For general inquiries, project quotes, and information requests.</p>
+            </div>
+            
+            <div class="contact-card" data-animation="fade-up" data-delay="0.2">
+                <div class="contact-icon"><i class="fas fa-phone-alt"></i></div>
+                <h3 class="contact-title">Call Us</h3>
+                <p class="contact-detail"><a href="tel:+1234567890">+1 (234) 567-890</a></p>
+                <p class="contact-description">Available Monday to Friday, 9:00 AM to 6:00 PM EST.</p>
+            </div>
+            
+            <div class="contact-card" data-animation="fade-up" data-delay="0.3">
+                <div class="contact-icon"><i class="fas fa-map-marker-alt"></i></div>
+                <h3 class="contact-title">Visit Us</h3>
+                <p class="contact-detail">123 Tech Plaza, Suite 456<br>San Francisco, CA 94103</p>
+                <p class="contact-description">Schedule a meeting at our headquarters.</p>
+            </div>
+            
+            <div class="contact-card" data-animation="fade-up" data-delay="0.4">
+                <div class="contact-icon"><i class="fas fa-comments"></i></div>
+                <h3 class="contact-title">Live Chat</h3>
+                <p class="contact-detail"><a href="#" class="start-chat-btn">Start Chat</a></p>
+                <p class="contact-description">Chat with our support team for immediate assistance.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Contact Form Section -->
+<section class="contact-form-section section-padding bg-dark">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="contact-content">
+                    <h2 class="section-title" data-animation="fade-up">Let's Discuss Your Project</h2>
+                    <p class="section-description" data-animation="fade-up" data-delay="0.2">
+                        Fill out the form with details about your project, and one of our experts will get back to you within 24 hours to discuss how we can help bring your vision to life.
+                    </p>
+                    
+                    <div class="contact-benefits">
+                        <div class="benefit-item" data-animation="fade-up" data-delay="0.3">
+                            <div class="benefit-icon"><i class="fas fa-check-circle"></i></div>
+                            <div class="benefit-content">
+                                <h4>Free Initial Consultation</h4>
+                                <p>We offer a complimentary consultation to discuss your project and requirements.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="benefit-item" data-animation="fade-up" data-delay="0.4">
+                            <div class="benefit-icon"><i class="fas fa-check-circle"></i></div>
+                            <div class="benefit-content">
+                                <h4>Detailed Project Analysis</h4>
+                                <p>Receive a comprehensive analysis of your project's scope, timeline, and budget.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="benefit-item" data-animation="fade-up" data-delay="0.5">
+                            <div class="benefit-icon"><i class="fas fa-check-circle"></i></div>
+                            <div class="benefit-content">
+                                <h4>Customized Solutions</h4>
+                                <p>We tailor our approach to meet your specific business objectives and challenges.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="contact-form-container" data-animation="fade-up" data-delay="0.3">
+                    <form class="contact-form" action="/contact/" method="post">
+                        <div class="form-group">
+                            <label for="name">Your Name <span class="required">*</span></label>
+                            <input type="text" id="name" name="name" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="email">Email Address <span class="required">*</span></label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="subject">Subject <span class="required">*</span></label>
+                            <input type="text" id="subject" name="subject" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="message">Your Message <span class="required">*</span></label>
+                            <textarea id="message" name="message" rows="5" required></textarea>
+                        </div>
+                        
+                        <div class="form-group form-check">
+                            <input type="checkbox" id="privacy" name="privacy" required>
+                            <label class="form-check-label" for="privacy">
+                                I agree to the <a href="/privacy-policy/">Privacy Policy</a> and consent to having my data processed as outlined therein.
+                            </label>
+                        </div>
+                        
+                        <button type="submit" class="btn btn-primary btn-lg">Send Message</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Map Section -->
+<section class="map-section">
+    <div class="map-container" data-animation="fade-up">
+        <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3153.6983042954344!2d-122.4194150846455!3d37.778313879757836!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8085809c6c8f4459%3A0xb10ed6d9b5050fa5!2sTwitter%20HQ!5e0!3m2!1sen!2sus!4v1648649831735!5m2!1sen!2sus"
+            width="100%"
+            height="450"
+            style="border:0;"
+            allowfullscreen=""
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+        ></iframe>
+    </div>
+</section>
+
+<!-- FAQ Section -->
+<section class="faq-section section-padding bg-dark">
+    <div class="container">
+        <div class="section-intro text-center">
+            <h2 class="section-title" data-animation="fade-up">Frequently Asked Questions</h2>
+            <p class="section-description" data-animation="fade-up" data-delay="0.2">
+                Find answers to common questions about our services, processes, and collaborations.
+            </p>
+        </div>
+        
+        <div class="faq-grid">
+            <div class="faq-item" data-animation="fade-up" data-delay="0.1">
+                <div class="faq-question">
+                    <h3>What industries do you specialize in?</h3>
+                    <span class="toggle-icon"><i class="fas fa-plus"></i></span>
+                </div>
+                <div class="faq-answer">
+                    <p>We work with clients across various industries, including healthcare, finance, e-commerce, education, manufacturing, and non-profit organizations. Our team has expertise in developing solutions tailored to the specific needs and regulatory requirements of different sectors.</p>
+                </div>
+            </div>
+            
+            <div class="faq-item" data-animation="fade-up" data-delay="0.2">
+                <div class="faq-question">
+                    <h3>How do you handle project pricing?</h3>
+                    <span class="toggle-icon"><i class="fas fa-plus"></i></span>
+                </div>
+                <div class="faq-answer">
+                    <p>We offer flexible pricing models including fixed-price projects, time and materials, and retainer arrangements. The appropriate model depends on your project's scope, complexity, and requirements. We provide detailed proposals with transparent pricing before any work begins.</p>
+                </div>
+            </div>
+            
+            <div class="faq-item" data-animation="fade-up" data-delay="0.3">
+                <div class="faq-question">
+                    <h3>What is your typical project timeline?</h3>
+                    <span class="toggle-icon"><i class="fas fa-plus"></i></span>
+                </div>
+                <div class="faq-answer">
+                    <p>Project timelines vary based on scope and complexity. Simple websites might take 4-6 weeks, while complex web applications or enterprise solutions can take several months. We provide detailed timelines during the planning phase and keep you updated throughout the project.</p>
+                </div>
+            </div>
+            
+            <div class="faq-item" data-animation="fade-up" data-delay="0.4">
+                <div class="faq-question">
+                    <h3>Do you provide ongoing support after project completion?</h3>
+                    <span class="toggle-icon"><i class="fas fa-plus"></i></span>
+                </div>
+                <div class="faq-answer">
+                    <p>Yes, we offer various support and maintenance packages to ensure your solution continues to perform optimally. These include technical support, regular updates, security patches, feature enhancements, and performance monitoring.</p>
+                </div>
+            </div>
+            
+            <div class="faq-item" data-animation="fade-up" data-delay="0.5">
+                <div class="faq-question">
+                    <h3>How do you ensure project quality?</h3>
+                    <span class="toggle-icon"><i class="fas fa-plus"></i></span>
+                </div>
+                <div class="faq-answer">
+                    <p>Quality assurance is integrated throughout our development process. We employ automated testing, code reviews, performance testing, and thorough manual testing before delivery. We also involve clients in regular reviews to ensure the solution meets their expectations.</p>
+                </div>
+            </div>
+            
+            <div class="faq-item" data-animation="fade-up" data-delay="0.6">
+                <div class="faq-question">
+                    <h3>Can you work with our existing team or systems?</h3>
+                    <span class="toggle-icon"><i class="fas fa-plus"></i></span>
+                </div>
+                <div class="faq-answer">
+                    <p>Absolutely. We're experienced in collaborating with in-house teams and integrating with existing systems and processes. Whether you need full project development or specialized expertise to complement your team, we adapt to your specific situation.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Initialize FAQ toggles
+        document.querySelectorAll('.faq-question').forEach(question => {
+            question.addEventListener('click', function() {
+                const faqItem = this.closest('.faq-item');
+                faqItem.classList.toggle('active');
+                
+                const icon = this.querySelector('.toggle-icon i');
+                if (faqItem.classList.contains('active')) {
+                    icon.classList.remove('fa-plus');
+                    icon.classList.add('fa-minus');
+                } else {
+                    icon.classList.remove('fa-minus');
+                    icon.classList.add('fa-plus');
+                }
+            });
+        });
+        
+        // Initialize live chat button
+        const chatBtn = document.querySelector('.start-chat-btn');
+        if (chatBtn) {
+            chatBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                // Implement chat functionality or open a chat widget
+                alert('Live chat feature coming soon!');
+            });
+        }
+    });
+</script>
+{% endblock %}

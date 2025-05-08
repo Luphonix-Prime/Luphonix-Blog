@@ -1,0 +1,18 @@
+{% load wagtailcore_tags wagtailimages_tags %}
+
+<div class="content-section">
+    {% for block in value %}
+        {% if block.block_type == 'heading' %}
+            <h2>{{ block.value }}</h2>
+        {% elif block.block_type == 'paragraph' %}
+            <p>{{ block.value }}</p>
+        {% elif block.block_type == 'image' %}
+            <figure>
+                {% image block.value.image width-800 %}
+                {% if block.value.caption %}
+                    <figcaption>{{ block.value.caption }}</figcaption>
+                {% endif %}
+            </figure>
+        {% endif %}
+    {% endfor %}
+</div>

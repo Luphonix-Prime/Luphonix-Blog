@@ -1,0 +1,41 @@
+/* Dark mode styles */
+:root {
+    --bg-color: #1a1a1a;
+    --text-color: #ffffff;
+    --bg-dark: #2d2d2d;
+    --border-color: #404040;
+}
+
+[data-theme="dark"] {
+    --bg-color: #1a1a1a;
+    --text-color: #ffffff;
+    --bg-dark: #2d2d2d;
+    --border-color: #404040;
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    transition: background-color 0.3s, color 0.3s;
+}
+
+/* Dark mode toggle button */
+.dark-mode-toggle {
+    background: none;
+    border: none;
+    color: var(--text-color);
+    cursor: pointer;
+    padding: 5px;
+    font-size: 1.2rem;
+}
+
+/* Add dark mode styles for other elements */
+[data-theme="dark"] .card,
+[data-theme="dark"] .navbar,
+[data-theme="dark"] .footer {
+    background-color: var(--bg-dark);
+}
+
+[data-theme="dark"] .border {
+    border-color: var(--border-color) !important;
+}

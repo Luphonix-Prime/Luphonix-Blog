@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}luphonix-Blog Blog{% endblock %}</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" href="/static/favicon.ico" type="image/x-icon">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Syntax Highlighting -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/atom-one-dark.min.css">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/static/css/style.css">
+    <link rel="stylesheet" href="/static/css/animations.css">
+    
+    {% block extra_css %}{% endblock %}
+</head>
+<body>
+    <div class="page-wrapper">
+        <!-- Header -->
+        <header class="site-header">
+            <div class="container">
+                <div class="header-inner">
+                    <div class="logo">
+                        <a href="/" class="logo-text">Luphonix<span class="text-primary">Blog</span></a>
+                    </div>  
+                    
+                    <nav class="main-nav">
+                        <ul class="nav-list">
+                            <li class="nav-item">
+                                <a href="{% url 'wagtail_serve' '' %}" class="nav-link {% if request.path == '/' %}active{% endif %}">Home</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{% slugurl 'about' %}" class="nav-link {% if request.path == '/about/' %}active{% endif %}">About</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{% slugurl 'services' %}" class="nav-link {% if request.path == '/services/' %}active{% endif %}">Services</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{% slugurl 'blog' %}" class="nav-link {% if '/blog/' in request.path %}active{% endif %}">Blog</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{% slugurl 'team' %}" class="nav-link {% if request.path == '/team/' %}active{% endif %}">Team</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{% slugurl 'contact' %}" class="nav-link {% if request.path == '/contact/' %}active{% endif %}">Contact</a>
+                            </li>
+                        </ul>
+                    </nav>
+                    
+                    <div class="header-actions">
+                        <button class="mobile-menu-toggle" aria-label="Toggle menu">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </header>
+        
+        <!-- Main Content -->
+        <main class="site-main">
+            <style>
+                .password-field {
+                    position: relative;
+                }
+                
+                .password-toggle {
+                    position: absolute;
+                    right: 10px;
+                    top: 50%;
+                    transform: translateY(-50%);
+                    cursor: pointer;
+                    color: #6c757d;
+                }
+                
+                .password-toggle:hover {
+                    color: #495057;
+                }
+                
+                .form-group input[type="password"],
+                .form-group input[type="text"] {
+                    padding-right: 40px;
+                }
+            </style>
+            {% block content %}{% endblock %}
+        </main>
+        
+        <!-- Footer -->
+        <footer class="site-footer">
+            <div class="container">
+                <div class="footer-top">
+                    <div class="footer-col">
+                        <div class="logo">
+                            <a href="/" class="logo-text">IT<span class="text-primary">Startup</span></a>
+                        </div>
+                        <p class="footer-about">
+                            We're a passionate team of tech enthusiasts dedicated to helping businesses thrive in the digital era.
+                        </p>
+                        <div class="social-links">
+                            <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                            <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                            <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="#" aria-label="GitHub"><i class="fab fa-github"></i></a>
+                            <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        </div>
+                    </div>
+                    
+                    <div class="footer-col">
+                        <h5 class="footer-heading">Quick Links</h5>
+                        <ul class="footer-links">
+                            <li><a href="{% url 'wagtail_serve' '' %}">Home</a></li>
+                            <li><a href="{% slugurl 'about' %}">About Us</a></li>
+                            <li><a href="{% slugurl 'services' %}">Services</a></li>
+                            <li><a href="{% slugurl 'blog' %}">Blog</a></li>
+                            <li><a href="{% slugurl 'team' %}">Our Team</a></li>
+                            <li><a href="{% slugurl 'contact' %}">Contact</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="footer-col">
+                        <h5 class="footer-heading">Services</h5>
+                        <ul class="footer-links">
+                            <li><a href="/services/#web-development">Web Development</a></li>
+                            <li><a href="/services/#mobile-apps">Mobile Applications</a></li>
+                            <li><a href="/services/#cloud-services">Cloud Services</a></li>
+                            <li><a href="/services/#ai-ml">AI & Machine Learning</a></li>
+                            <li><a href="/services/#it-consulting">IT Consulting</a></li>
+                            <li><a href="/services/#cybersecurity">Cybersecurity</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="footer-col">
+                        <h5 class="footer-heading">Newsletter</h5>
+                        <p>Subscribe to our newsletter to receive updates and valuable tech insights.</p>
+                        
+                        <form class="newsletter-form" action="/newsletter-signup/" method="post">
+                            {% csrf_token %}
+                            <div class="form-group">
+                                <input type="email" name="email" placeholder="Your Email Address" required>
+                                <button type="submit" class="btn btn-primary">Subscribe</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                
+                <div class="footer-bottom">
+                    <p class="copyright">&copy; {% now "Y" %} ITStartup. All Rights Reserved.</p>
+                    <ul class="footer-legal">
+                        <li><a href="/privacy-policy/">Privacy Policy</a></li>
+                        <li><a href="/terms-of-service/">Terms of Service</a></li>
+                        <li><a href="/sitemap/">Sitemap</a></li>
+                    </ul>
+                </div>
+            </div>
+        </footer>
+    </div>
+    
+    <!-- JavaScript Libraries -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+    
+    <!-- Custom JavaScript -->
+    <script src="/static/js/main.js"></script>
+    <script src="/static/js/animations.js"></script>
+    
+    <!-- Initialize Scripts -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Mobile menu toggle functionality
+            const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
+            const mainNav = document.querySelector('.main-nav');
+            
+            if (mobileMenuToggle && mainNav) {
+                mobileMenuToggle.addEventListener('click', function() {
+                    mainNav.classList.toggle('active');
+                    mobileMenuToggle.classList.toggle('active');
+                });
+            }
+            
+            // Initialize main functionality
+            if (typeof initNavigation === 'function') initNavigation();
+            if (typeof initScrollEffects === 'function') initScrollEffects();
+            if (typeof initForms === 'function') initForms();
+            if (typeof initLazyLoading === 'function') initLazyLoading();
+            
+            // Initialize animations
+            if (typeof initScrollReveal === 'function') initScrollReveal();
+            if (typeof initLetterAnimations === 'function') initLetterAnimations();
+            if (typeof initTypingEffect === 'function') initTypingEffect();
+            if (typeof initSVGAnimations === 'function') initSVGAnimations();
+            if (typeof initSmoothScrolling === 'function') initSmoothScrolling();
+            if (typeof initTextScramble === 'function') initTextScramble();
+            
+            // Advanced effects (optional)
+            if (typeof initParallax === 'function') initParallax();
+            if (typeof initCounters === 'function') initCounters();
+            if (typeof initCustomCursor === 'function') initCustomCursor();
+            if (typeof initPageTransitions === 'function') initPageTransitions();
+            
+            // Initialize syntax highlighting
+            if (typeof hljs !== 'undefined') {
+                hljs.highlightAll();
+            }
+            
+            // Initialize grid animations
+            document.querySelectorAll('.features-grid, .services-grid, .blog-grid, .team-grid').forEach(grid => {
+                if (typeof animateGrid === 'function') animateGrid('.' + grid.className.split(' ')[0]);
+            });
+        });
+    </script>
+    
+    {% block extra_js %}{% endblock %}
+</body>
+</html>

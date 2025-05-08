@@ -1,0 +1,256 @@
+{% extends "base.html" %}
+{% load wagtailcore_tags wagtailimages_tags %}
+
+{% block title %}Search Results | luphonix-Blog{% endblock %}
+
+{% block content %}
+<!-- Page Header -->
+<section class="page-header" style="justify-items: center; justify-content: center;">
+    <div class="container" style="justify-items: center; justify-content: center;">
+        <div class="page-header-content">
+            <h1 class="page-title" data-animation="fade-up">Search Results</h1>
+            <div class="page-description" data-animation="fade-up" data-delay="0.1">
+                {% if search_query %}
+                    {% if search_results %}
+                        Results for "{{ search_query }}"
+                    {% else %}
+                        No results found for "{{ search_query }}"
+                    {% endif %}
+                {% else %}
+                    Search our blog posts
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    <div class="page-header-shape"></div>
+    <!-- Search Widget -->
+    <div class="sidebar-widget search-widget" data-animation="fade-up" data-delay="0.1"
+        style="width: 552px; height: 75px; background-color: transparent; margin-right: 50px;">
+        <div class="widget-content">
+            <form action="{% url 'search' %}" method="get" class="search-form">
+                <div class="input-group">
+                    <input type="text" name="query" class="form-control" placeholder="Search posts..." value="{{ search_query }}">
+                    <button type="submit" class="btn btn-primary"><i class="fas fa-search"></i></button>
+                </div>
+            </form>
+        </div>
+    </div>
+</section>
+
+<!-- Search Results Section -->
+<section class="blog-listing section-padding">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8">
+                <!-- Search Results -->
+                <div class="blog-posts" style="display: flex; flex-direction: column; align-items: center; width: 1300px;">
+                    {% if search_results %}
+                        {% for result in search_results %}
+                        <div class="blog-card-row {% if forloop.counter|divisibleby:2 %}zigzag-reverse{% else %}zigzag{% endif %}"
+                            data-animation="fade-up" data-delay="{{ forloop.counter0 }}00ms" style="width: 100%;">
+                            {% if result.specific.banner_image %}
+                            <div class="blog-image">
+                                {% image result.specific.banner_image fill-800x450 as banner %}
+                                <a href="{% pageurl result %}">
+                                    <img src="{{ banner.url }}" alt="{{ result.title }}" class="img-fluid">
+                                </a>
+                            </div>
+                            {% endif %}
+                            <div class="blog-content">
+                                <div class="blog-meta">
+                                    {% if result.specific.date %}
+                                    <span class="blog-date"><i class="far fa-calendar-alt"></i> {{ result.specific.date|date:"F j, Y" }}</span>
+                                    {% endif %}
+                                    {% if result.specific.author %}
+                                    <span class="blog-author"><i class="far fa-user"></i> {{ result.specific.author.name }}</span>
+                                    {% endif %}
+                                    {% if result.specific.categories.all %}
+                                    <span class="blog-category">
+                                        <i class="far fa-folder-open"></i>
+                                        {% for category in result.specific.categories.all %}
+                                        {{ category.name }}{% if not forloop.last %}, {% endif %}
+                                        {% endfor %}
+                                    </span>
+                                    {% endif %}
+                                </div>
+                                <h3 class="blog-title"><a href="{% pageurl result %}">{{ result.title }}</a></h3>
+                                <p class="blog-excerpt">{{ result.search_description }}</p>
+                                <a href="{% pageurl result %}" class="blog-link">Read More <i class="fas fa-arrow-right"></i></a>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    {% else %}
+                        <div class="no-posts" data-animation="fade-up">
+                            <h3>{% if search_query %}No results found{% else %}Enter a search term{% endif %}</h3>
+                            <p>{% if search_query %}Try different keywords or browse our categories{% else %}Use the search box above to find content{% endif %}</p>
+                        </div>
+                    {% endif %}
+                </div>
+
+                <style>
+                    .blog-posts {
+                        display: flex;
+                        flex-wrap: wrap;
+                        gap: 20px;
+                        width: 100%;
+                    }
+
+                    .blog-card-row {
+                        display: flex;
+                        width: 100%;
+                        margin-bottom: 30px;
+                        background: #fff;
+                        border-radius: 8px;
+                        overflow: hidden;
+                        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+                        transition: transform 0.3s ease;
+                    }
+
+                    .blog-card-row:hover {
+                        transform: translateY(-5px);
+                    }
+
+                    .blog-card-row.zigzag {
+                        flex-direction: row;
+                    }
+
+                    .blog-card-row.zigzag-reverse {
+                        flex-direction: row-reverse;
+                    }
+
+                    .blog-image {
+                        flex: 1;
+                        max-width: 50%;
+                    }
+
+                    .blog-image img {
+                        width: 100%;
+                        height: 100%;
+                        object-fit: cover;
+                    }
+
+                    .blog-content {
+                        flex: 1;
+                        padding: 30px;
+                        display: flex;
+                        flex-direction: column;
+                        justify-content: center;
+                    }
+
+                    @media (max-width: 768px) {
+                        .blog-card-row,
+                        .blog-card-row.zigzag,
+                        .blog-card-row.zigzag-reverse {
+                            flex-direction: column;
+                        }
+
+                        .blog-image {
+                            max-width: 100%;
+                        }
+
+                        .blog-content {
+                            padding: 20px;
+                        }
+
+                        .blog-title a {
+                            font-size: 1.6rem;
+                        }
+                    }
+                </style>
+            </div>
+
+            <!-- Sidebar -->
+            <div class="col-lg-4">
+                <aside class="blog-sidebar">
+                    <!-- About Widget -->
+                    <div class="sidebar-widget about-widget" data-animation="fade-up">
+                        <h4 class="widget-title">About Us</h4>
+                        <div class="widget-content">
+                            <p>We're a team of passionate technologists dedicated to solving complex business challenges
+                                with innovative digital solutions.</p>
+                            <a href="/about/" class="btn btn-outline-primary btn-sm">Learn More</a>
+                        </div>
+                    </div>
+
+                    <!-- Categories Widget -->
+                    <div class="sidebar-widget categories-widget" data-animation="fade-up" data-delay="0.2">
+                        <h4 class="widget-title">Categories</h4>
+                        <div class="widget-content">
+                            <ul class="categories-list">
+                                {% for category in categories %}
+                                <li>
+                                    <a href="{% url 'blog:category' category.slug %}">
+                                        {% if category.icon %}<i class="{{ category.icon }}"></i>{% endif %}
+                                        {{ category.name }}
+                                    </a>
+                                </li>
+                                {% empty %}
+                                <li><a href="#"><i class="fas fa-laptop-code"></i> Web Development</a></li>
+                                <li><a href="#"><i class="fas fa-mobile-alt"></i> Mobile Apps</a></li>
+                                <li><a href="#"><i class="fas fa-cloud"></i> Cloud Services</a></li>
+                                <li><a href="#"><i class="fas fa-robot"></i> AI & Machine Learning</a></li>
+                                <li><a href="#"><i class="fas fa-database"></i> Data Science</a></li>
+                                <li><a href="#"><i class="fas fa-shield-alt"></i> Cybersecurity</a></li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Tags Widget -->
+                    <div class="sidebar-widget tags-widget" data-animation="fade-up" data-delay="0.3">
+                        <h4 class="widget-title">Popular Tags</h4>
+                        <div class="widget-content">
+                            <div class="tags-cloud">
+                                {% for tag in popular_tags %}
+                                <a href="{% url 'blog:tag' tag.slug %}" class="tag">{{ tag }}</a>
+                                {% empty %}
+                                <a href="#" class="tag">Web Development</a>
+                                <a href="#" class="tag">JavaScript</a>
+                                <a href="#" class="tag">React</a>
+                                <a href="#" class="tag">Python</a>
+                                <a href="#" class="tag">Cloud</a>
+                                <a href="#" class="tag">AWS</a>
+                                <a href="#" class="tag">DevOps</a>
+                                <a href="#" class="tag">Machine Learning</a>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Newsletter Widget -->
+                    <div class="sidebar-widget newsletter-widget" data-animation="fade-up" data-delay="0.4">
+                        <h4 class="widget-title">Newsletter</h4>
+                        <div class="widget-content">
+                            <p>Subscribe to our newsletter for the latest updates and insights.</p>
+                            <form class="newsletter-form" action="/newsletter-signup/" method="post">
+                                {% csrf_token %}
+                                <div class="input-group">
+                                    <input type="email" name="email" class="form-control"
+                                        placeholder="Your email address" required>
+                                    <button type="submit" class="btn btn-primary">Subscribe</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </aside>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
+{% if search_results %}
+    <div class="blog-grid">
+        {% for result in search_results %}
+            <div class="blog-card" data-animation="fade-up" data-delay="{{ forloop.counter0 }}00ms">
+                <div class="blog-content">
+                    <h3 class="blog-title">
+                        <a href="{% pageurl result %}">{{ result.title }}</a>
+                    </h3>
+                    {% if result.search_description %}
+                        <p class="blog-excerpt">{{ result.search_description }}</p>
+                    {% endif %}
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% endif %}

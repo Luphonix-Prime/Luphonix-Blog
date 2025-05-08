@@ -1,0 +1,3 @@
+"""
+Wagtail application package
+"""
