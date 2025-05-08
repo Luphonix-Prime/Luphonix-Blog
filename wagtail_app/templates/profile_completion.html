@@ -4,9 +4,7 @@
 
 {% block title %}Complete Your Profile | Luphonix Blog{% endblock %}
 
-{% block extra_css %}
-<link rel="stylesheet" href="{% static 'css/style.css' %}">
-{% endblock %}
+
 
 {% block content %}
 <section class="auth-section section-padding">
@@ -57,17 +55,7 @@
     </div>
 </section>
 
-{% block extra_js %}
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        // Ensure styles are properly loaded
-        const link = document.createElement('link');
-        link.rel = 'stylesheet';
-        link.href = "{% static 'css/style.css' %}";
-        document.head.appendChild(link);
-    });
-</script>
-{% endblock %}
+
 
 <style>
 /* Form validation styles only - other styles should be in style.css */
