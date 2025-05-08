@@ -5,7 +5,10 @@
 {% block title %}Complete Your Profile | Luphonix Blog{% endblock %}
 
 {% block extra_css %}
-<link rel="stylesheet" href="{% static 'css/style.css' %}">
+<link rel="stylesheet" href="{% static 'css/style.css' %}" media="all">
+<!--[if IE]>
+    <link rel="stylesheet" href="{% static 'css/ie-fallback.css' %}">
+<![endif]-->
 <style>
     .profile-completion {
         background-color: var(--section-bg-light);
@@ -109,5 +112,28 @@
     </div>
 </section>
 
-{% block extra_js %}{% endblock %}
+{% block extra_js %}
+<script>
+    // Check if the stylesheet loaded correctly
+    window.addEventListener('load', function() {
+        const styleSheets = document.styleSheets;
+        let mainStyleFound = false;
+        
+        for(let i = 0; i < styleSheets.length; i++) {
+            if(styleSheets[i].href && styleSheets[i].href.includes('style.css')) {
+                mainStyleFound = true;
+                break;
+            }
+        }
+        
+        if(!mainStyleFound) {
+            console.error('Main stylesheet failed to load');
+            // You can add a fallback or notification here
+        }
+        else {
+            console.log('Main stylesheet loaded successfully');
+        }
+    });
+</script>
+{% endblock %}
 {% endblock %}
