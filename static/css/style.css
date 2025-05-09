@@ -347,62 +347,35 @@ img {
 }
 
 @media (max-width: 991px) {
-  /*mobile menu*/
+  /* Header */
   .mobile-menu-toggle {
-    display: block; /* Ensure toggle is visible */
+ display: block;
   }
-  
+
   .nav-list {
-    position: absolute;
-    top: 100%; /* Position below header */
+ position: absolute;
+    top: 100%;
     left: 0;
     width: 100%;
     flex-direction: column;
-    background-color: var(--dark-surface); /* Or appropriate background */
+ background-color: var(--dark-surface);
     padding: 1rem 0;
-    /* Hidden state */
     opacity: 0;
     visibility: hidden;
-    transform: translateY(-10px); 
+ transform: translateY(-10px);
     transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s ease;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
   }
 
   .nav-list.active {
-    /* Visible state */
-    display: block;
+ display: block;
     opacity: 1;
     visibility: visible;
     transform: translateY(0);
   }
+
   .nav-list li {
     padding: 0.5rem 1rem;
-}
-  /* Optional: Style for the toggle button when active (e.g., transform to 'X') */
-  .mobile-menu-toggle.active span:nth-child(1) {
-    transform: translateY(7px) rotate(45deg);
-  }
-  .mobile-menu-toggle.active span:nth-child(2) {
-    opacity: 0;
-  }
-  .mobile-menu-toggle.active span:nth-child(3) {
-    transform: translateY(-7px) rotate(-45deg);
-  }
-
-  .nav-item {
-    margin: 0; /* Adjust margin for vertical layout */
-  }
-
-  .nav-link {
-    display: block; /* Make links take full width */
-    padding: 0.75rem 1.5rem; /* Add padding for touch targets */
-    color: var(--dark-text); /* Adjust color for background */
-  }
-
-  .nav-link:hover,
-  .nav-link.active {
-    background-color: rgba(255, 255, 255, 0.1); /* Example hover/active background */
-    color: var(--primary-color-light); /* Keep hover/active color */
   }
 
   .nav-link.active:after {
@@ -410,14 +383,10 @@ img {
   }
 
   .header-actions {
-    margin-left: auto;
-    display: flex;
-        align-items: center; /* Push actions to the right */
+ margin-left: auto;
+ align-items: center;
   }
-  
-  .theme-toggle {
-     margin-right: 0.5rem; /* Adjust spacing */
-  }
+
   .ls-two{
     display: none;
   }
@@ -502,14 +471,9 @@ img {
 } 
 
 @media (max-width: 991px) {
-  /* hero section*/
   .hero-section {
     padding: 8rem 0 4rem;
     text-align: center;
-  }
-  
-  .hero-content {
-    margin: 0 auto;
   }
   
   .hero-title {
@@ -518,9 +482,7 @@ img {
   
   .hero-image {
     margin-top: 3rem;
-    max-width: 80%;
-    margin-left: auto;
-    margin-right: auto;
+    max-width: 80%; /* Limit width on smaller screens */
   }
 }
 
@@ -1524,14 +1486,7 @@ figcaption {
 
 /* Media Queries */
 @media (max-width: 991px) {
-  /*blog-section*/
-  .section-title {
-    font-size: 2rem;
-  }
-  
-  .page-title {
-    font-size: 2.5rem;
-  }
+    
   
   .blog-post {
     padding: 1.5rem;
@@ -1545,43 +1500,29 @@ figcaption {
     flex-direction: column;
   }
   
-  .author-image {
-    margin-right: 0;
+  .author-image { /* Align author image in column layout */
+    margin-right: 0; 
     margin-bottom: 1.5rem;
     text-align: center;
   }
 }
 
 @media (max-width: 767px) {
+  /* General adjustments for smaller screens */
   :root {
     --section-padding: 4rem 0;
     --section-padding-sm: 2.5rem 0;
   }
-  
-  .section-title {
-    font-size: 1.75rem;
-  }
-  
-  .page-title {
-    font-size: 2rem;
-  }
-  
+
+  /* Typography adjustments */
   .hero-title {
     font-size: 2rem;
   }
-  
+
   .hero-subtitle {
     font-size: 1.1rem;
   }
-  
-  .stat-number {
-    font-size: 2rem;
-  }
-  
-  .feature-card, .service-card {
-    padding: 1.5rem;
-  }
-  
+
   .feature-icon, .service-icon {
     font-size: 2rem;
   }
@@ -1589,40 +1530,15 @@ figcaption {
   .cta-title {
     font-size: 2rem;
   }
-}
-/* Header Responsive Styles */
-/* Removed conflicting styles from @media (max-width: 768px) */
 
-/* General Responsive Styles */
-@media (max-width: 768px) {
+  /* Container padding */
   .container {
-      padding: 0 15px;
-  }
-
-  .row {
-      margin: 0 -15px;
-  }
-
-  .col-lg-6 {
-      padding: 0 15px;
-  }
-
-  /* Service Cards */
-  .service-detail {
-      padding: 30px 0;
-  }
-
-  .service-content {
-      text-align: center;
-  }
-
-  .feature-item {
-      margin-bottom: 20px;
+    padding: 0 1rem;
   }
 
   /* Contact Section */
   .contact-card {
-      margin-bottom: 20px;
+    margin-bottom: 1.5rem;
   }
 
   .contact-form-container {
@@ -1631,15 +1547,17 @@ figcaption {
 
   /* Testimonials */
   .testimonial {
-      padding: 15px;
+    padding: 1rem;
   }
 
-  /* FAQ Section */
-  .faq-item {
-      margin-bottom: 15px;
+  /* Footer */
+  .footer-bottom {
+    flex-direction: column;
+    text-align: center;
+    padding-top: 1rem;
   }
 }
-
+ 
 /* Image Responsiveness */
 .img-fluid {
   max-width: 100%;
