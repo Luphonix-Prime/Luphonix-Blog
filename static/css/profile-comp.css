@@ -1,0 +1,50 @@
+.profile-completion {
+    background-color: var(--section-bg-light);
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 2rem;
+}
+
+.profile-completion-header {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 1rem;
+}
+
+.profile-completion-bar {
+    background-color: var(--bg-secondary);
+    border-radius: 4px;
+    overflow: hidden;
+    height: 20px;
+    margin-bottom: 1rem;
+}
+
+.profile-completion-bar-fill {
+    background-color: var(--accent-color);
+    height: 100%;
+    width: 75%;
+    transition: width 0.3s ease;
+}
+
+.profile-completion-text {
+    font-size: 1rem;
+    color: var(--text-secondary);
+}
+
+.text-danger {
+    color: #dc3545;
+}
+
+.form-control:required {
+    border-color: #ced4da;
+}
+
+.form-control:required:valid {
+    border-color: #28a745;
+}
+
+.form-control:required:invalid {
+    border-color: #dc3545;
+}

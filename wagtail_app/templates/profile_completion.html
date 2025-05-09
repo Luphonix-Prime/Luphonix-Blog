@@ -5,10 +5,7 @@
 {% block title %}Complete Your Profile | Luphonix Blog{% endblock %}
 
 {% block extra_css %}
-<link rel="stylesheet" href="{% static 'css/style.css' %}" media="all">
-<!--[if IE]>
-    <link rel="stylesheet" href="{% static 'css/ie-fallback.css' %}">
-<![endif]-->
+<link rel="stylesheet" href="{% static 'css/style.css' %}" type="text/css">
 <style>
     .profile-completion {
         background-color: var(--section-bg-light);
@@ -113,25 +110,18 @@
 </section>
 
 {% block extra_js %}
-<script>
-    // Check if the stylesheet loaded correctly
-    window.addEventListener('load', function() {
-        const styleSheets = document.styleSheets;
-        let mainStyleFound = false;
+<script type="text/javascript">
+    document.addEventListener('DOMContentLoaded', function() {
+        const styleSheets = Array.from(document.styleSheets);
+        const mainStyle = styleSheets.find(sheet => 
+            sheet.href && sheet.href.includes('style.css')
+        );
         
-        for(let i = 0; i < styleSheets.length; i++) {
-            if(styleSheets[i].href && styleSheets[i].href.includes('style.css')) {
-                mainStyleFound = true;
-                break;
-            }
-        }
-        
-        if(!mainStyleFound) {
-            console.error('Main stylesheet failed to load');
-            // You can add a fallback or notification here
+        if (!mainStyle) {
+            console.warn('Main stylesheet may not have loaded correctly');
         }
         else {
-            console.log('Main stylesheet loaded successfully');
+            console.log('Main stylesheet loaded:', mainStyle.href);
         }
     });
 </script>

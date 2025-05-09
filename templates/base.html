@@ -8,7 +8,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}luphonix-Blog Blog{% endblock %}</title>
 
     <!-- Favicon -->
@@ -234,7 +234,7 @@
 
     {% block extra_js %}{% endblock %}
     <!-- Add before closing body tag -->
-    <script src="/static/js/mobile-menu.js"></script>
+    <script type="text/javascript" src="{% static 'js/mobile-menu.js' %}"></script>
 </body>
 <!-- Floating Button -->
 <div class="floating-button">
