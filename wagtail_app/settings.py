@@ -82,6 +82,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+     'whitenoise.middleware.WhiteNoiseMiddleware',
     'wagtail_app.middleware.ProfileCompletionMiddleware',
     'wagtail.contrib.redirects.middleware.RedirectMiddleware',
     
@@ -155,7 +156,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
 STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'collected_static')
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),
     os.path.join(BASE_DIR, 'wagtail_app', 'static'),
@@ -229,3 +230,5 @@ FILE_UPLOAD_DIRECTORY_PERMISSIONS = 0o755
 
 # Maximum upload size (optional)
 MAX_UPLOAD_SIZE = 5242880  # 5MB
+
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
