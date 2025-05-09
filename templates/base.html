@@ -71,19 +71,29 @@
                                     <a href="/admin/"
                                         class="nav-link {% if request.path == '/admin/' %}active{% endif %}">Wagtail</a>
                                 </li>
+                                {% if request.user.is_authenticated %}
                                 <li class="nav-item">
+                                <span class="user-name shown-name">{{ request.user.get_full_name|default:request.user.username }}</span>
+                                </li>
+                                <li class="nav-item">
+                                <a href="{% url 'blog:logout' %}" class="shown2-name  ">Logout</a>
+                                </li>
+                            {% else %}
+                                    <li class="nav-item">
+                               
                                     <a href="{% url 'wagtailadmin_login' %}" class="nav-link ls-one">Login</a>
                                 </li>
                                 <li class="nav-item">
                                     <a href="/blog/signup/" class="nav-link ls-one">Sign Up</a>
                                 </li>
+                                {% endif %}
                             </ul>
                         </nav>
                     </div>
-                    <div>
+                    <div style="margin-right: 20px;">
                     {% if request.user.is_authenticated %}
-                            <span class="user-name">{{ request.user.get_full_name|default:request.user.username }}</span>
-                            <a href="{% url 'blog:logout' %}" class="btn btn-outline-primary">Logout</a>
+                            <span class="user-name hidden-name">{{ request.user.get_full_name|default:request.user.username }}</span>
+                            <a href="{% url 'blog:logout' %}" class="btn btn-outline-primary hidden-name">Logout</a>
                         {% else %}
                             <a href="{% url 'wagtailadmin_login' %}" class="btn btn-outline-primary ls-two">Login</a>
                             <a href="/blog/signup/" class="btn btn-primary ls-two">Sign Up</a>

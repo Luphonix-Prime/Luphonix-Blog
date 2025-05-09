@@ -29,6 +29,7 @@
 /* Base Styles */
 html {
   scroll-behavior: smooth;
+  overflow-x: hidden;
 }
 
 body {
@@ -144,6 +145,12 @@ img {
 }
 
 @media (min-width: 992px) {
+  .shown-name{
+    display: none;
+  }
+  .shown2-name{
+    display: none;
+  }
   .ls-two{
     display: none;
   }
@@ -256,7 +263,7 @@ img {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 1rem 0;
+  padding: 0rem 0;
 }
 
 .logo {
@@ -351,7 +358,10 @@ img {
   .mobile-menu-toggle {
  display: block;
   }
+  .hidden-name{
+    display: none;
 
+  }
   .nav-list {
  position: absolute;
     top: 100%;
@@ -863,7 +873,6 @@ img {
 }
 
 .form-group input {
-  width: 100%;
   padding: 0.75rem 1rem;
   background-color: var(--dark-surface-2);
   border: 1px solid var(--dark-border);
@@ -982,7 +991,6 @@ img {
 }
 
 .page-title {
-  font-size: 3rem;
   margin-bottom: 1rem;
 }
 
@@ -1588,7 +1596,7 @@ figcaption {
 .floating-button {
   position: fixed;
   bottom: 20px;
-  right: 20px;
+  right: 50px;
   background-color: #3498db;
   color: white;
   border-radius: 50%;
@@ -1599,9 +1607,8 @@ figcaption {
   justify-content: center;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
   text-decoration: none;
-  z-index: 1000;
+  z-index: 9999;
 }
-
 .floating-button:hover {
   background-color: #0056b3;
 }
