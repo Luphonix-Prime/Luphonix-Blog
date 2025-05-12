@@ -1,0 +1,69 @@
+### 📄 *New Blog Post Prompt for CMS (with Required Subheading in Each Content Section)*
+
+Please provide the following blog content.
+Each *Content Section* must include:
+
+* 1 *Heading* (required)
+* 1 *Subheading* (required)
+* 1 or more *Paragraphs, **Image with Caption*, or both.
+
+---
+
+#### *Page Title*
+
+[Your blog post title here]
+
+#### *Post Date*
+
+[YYYY-MM-DD]
+
+#### *Author*
+
+[Author's full name]
+
+#### *Tags*
+
+[Comma-separated list of tags]
+
+#### *Categories* (optional)
+
+[List of category names]
+
+#### *Banner Image* (optional)
+
+[Image description or upload separately]
+
+---
+
+#### *Intro*
+
+[A short summary or engaging hook for the blog]
+
+---
+
+#### *Body* (repeatable sections)
+
+Each *Content Section* must include:
+
+##### 🔹 *Content Section*
+
+* *Heading*: [Enter the main heading for this section]
+* *Subheading* (required): [Enter a descriptive subheading for this section]
+* *Paragraph*: [Write one or more paragraphs here]
+* *Image with Caption* (optional):
+
+  * Image: [Upload separately or describe]
+  * Caption: [Enter image caption]
+
+> Optionally, you may include the following outside the Content Section:
+
+##### 🔸 *Code Block*
+
+code
+[Your code here]
+
+
+##### 🔸 *Raw HTML*
+
+html
+[Your raw HTML here]
