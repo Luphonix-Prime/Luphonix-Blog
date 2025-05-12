@@ -43,6 +43,101 @@
                             </div>
                         </div>
                     </div> -->
+    <!-- Copy Prompt Button -->
+    <div class="copy-prompt-container" style="text-align: center; margin-top: 20px;">
+        <button id="copyPromptBtn" class="btn btn-primary" onclick="copyPromptToClipboard()">
+            <i class="far fa-copy"></i> Copy Prompt Template
+        </button>
+    </div>
+
+    <script>
+        async function copyPromptToClipboard() {
+            const promptText = `### 📄 *New Blog Post Prompt for CMS (with Required Subheading in Each Content Section)*
+
+Please provide the following blog content.
+Each *Content Section* must include:
+
+* 1 *Heading* (required)
+* 1 *Subheading* (required)
+* 1 or more *Paragraphs, **Image with Caption*, or both.
+
+---
+
+#### *Page Title*
+
+[Your blog post title here]
+
+#### *Post Date*
+
+[YYYY-MM-DD]
+
+#### *Author*
+
+[Author's full name]
+
+#### *Tags*
+
+[Comma-separated list of tags]
+
+#### *Categories* (optional)
+
+[List of category names]
+
+#### *Banner Image* (optional)
+
+[Image description or upload separately]
+
+---
+
+#### *Intro*
+
+[A short summary or engaging hook for the blog]
+
+---
+
+#### *Body* (repeatable sections)
+
+Each *Content Section* must include:
+
+##### 🔹 *Content Section*
+
+* *Heading*: [Enter the main heading for this section]
+* *Subheading* (required): [Enter a descriptive subheading for this section]
+* *Paragraph*: [Write one or more paragraphs here]
+* *Image with Caption* (optional):
+
+  * Image: [Upload separately or describe]
+  * Caption: [Enter image caption]
+
+> Optionally, you may include the following outside the Content Section:
+
+##### 🔸 *Code Block*
+
+code
+[Your code here]
+
+
+##### 🔸 *Raw HTML*
+
+html
+[Your raw HTML here]
+`;
+
+            try {
+                await navigator.clipboard.writeText(promptText);
+                const btn = document.getElementById('copyPromptBtn');
+                const originalText = btn.innerHTML;
+                btn.innerHTML = '<i class="fas fa-check"></i> Copied!';
+                
+                setTimeout(() => {
+                    btn.innerHTML = originalText;
+                }, 2000);
+            } catch (error) {
+                console.error('Error copying prompt:', error);
+                alert('Failed to copy prompt template. Please try again.');
+            }
+        }
+    </script>
 </section>
     
 <!-- Blog Listing -->
