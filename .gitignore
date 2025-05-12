@@ -1,4 +1,9 @@
-    /wagtail_app/__pycache__
+db.sqlite3
+*.sqlite3
+/db.sqlite3
+/*.sqlite3
+
+/wagtail_app/__pycache__
 /wagtail_app/home/__pycache__
 /wagtail_app/blog/__pycache__
 __pycache__
@@ -6,7 +11,3 @@ __pycache__
 
 .env
 .vscode/
-db.sqlite3
-*.sqlite3
-/db.sqlite3
-/*.sqlite3
