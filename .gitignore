@@ -1,7 +1,4 @@
-db.sqlite3
-*.sqlite3
-/db.sqlite3
-/*.sqlite3
+
 
 /wagtail_app/__pycache__
 /wagtail_app/home/__pycache__
@@ -11,7 +8,4 @@ __pycache__
 
 .env
 .vscode/
-<<<<<<< HEAD
-Sql
-=======
->>>>>>> 4e77faf8fbf0f21069fc43f45c2f9dade449a8a7
+/Sql
