@@ -39,10 +39,12 @@ INSTALLED_APPS = [
     'wagtail_app.home',
     'wagtail_app.blog',
     
+    'django.contrib.admin',  # Add this line
+    
     'wagtail.contrib.forms',
     'wagtail.contrib.redirects',
     'wagtail.embeds',
-    'wagtail.sites',
+    # 'wagtail.sites',  # Remove this if it exists
     'wagtail.users',
     'wagtail.snippets',
     'wagtail.documents',
@@ -51,26 +53,21 @@ INSTALLED_APPS = [
     'wagtail.admin',
     'wagtail',
     
- 
-    
     'modelcluster',
     'taggit',
     
-    'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sites',  # Keep only this one
     
-    'django.contrib.sites',
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
-    # Add the providers you want to enable
     'allauth.socialaccount.providers.google',
     'allauth.socialaccount.providers.github',
-    
 ]
 
 MIDDLEWARE = [
@@ -117,10 +114,10 @@ WSGI_APPLICATION = 'wagtail_app.wsgi.application'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
+    'default': env.db_url(
+        'DATABASE_URL',  # Reads the DATABASE_URL from your .env file
+        default='postgresql://neondb_owner:npg_Uas3YkRL6iSd@ep-green-wind-a4rxhltl-pooler.us-east-1.aws.neon.tech/neondb?sslmode=require'  # A fallback default
+    )
 }
 
 # Password validation
@@ -155,12 +152,16 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
+# Static files (CSS, JavaScript, Images)
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'collectstatic')
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),
     os.path.join(BASE_DIR, 'wagtail_app', 'static'),
 ]
+
+# Change the staticfiles storage to use the basic one instead
+STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.StaticFilesStorage'
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
@@ -212,10 +213,14 @@ LOGIN_REDIRECT_URL = '/'  # This ensures redirect to homepage after SSO login
 ACCOUNT_LOGOUT_REDIRECT_URL = '/'
 
 # Allauth settings
-ACCOUNT_EMAIL_REQUIRED = True
-ACCOUNT_USERNAME_REQUIRED = True
+ACCOUNT_LOGIN_METHODS = {'username', 'email'}  # Updated from ACCOUNT_AUTHENTICATION_METHOD
+# ACCOUNT_USERNAME_REQUIRED = True  # Ensure this is True and uncommented
+# ACCOUNT_EMAIL_REQUIRED = True     # Ensure this is True and uncommented
+ACCOUNT_SIGNUP_FIELDS = ['username', 'email', 'password'] # This line seems fine
+# ACCOUNT_EMAIL_REQUIRED = True # Remove or comment out this line <- This can be removed if redundant
+# ACCOUNT_USERNAME_REQUIRED = True # Remove or comment out this line <- This can be removed if redundant
 ACCOUNT_EMAIL_VERIFICATION = 'optional'
-ACCOUNT_AUTHENTICATION_METHOD = 'username_email'
+# ACCOUNT_AUTHENTICATION_METHOD = 'username_email' # Remove or comment out this line
 SOCIALACCOUNT_AUTO_SIGNUP = True
 SOCIALACCOUNT_LOGIN_ON_GET = True  # Skip the intermediate page
 ACCOUNT_DEFAULT_HTTP_PROTOCOL = 'http'  # Add this if you're using HTTP in development
