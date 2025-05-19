@@ -200,8 +200,8 @@ SOCIALACCOUNT_PROVIDERS = {
     'github': {
          'SCOPE': ['user:email'],
         'APP': {
-            'client_id': 'Ov23li6CmqRdYckRFzQq',
-            'secret': '60c41cb65d067cd6235123232329d193faa2ea58',
+            'client_id': 'Ov23liGGyvPz6D30efjZ',
+            'secret': '6f850472b46a799253c7530f61d52648e5d92406',
             'key': ''
         }
     }
