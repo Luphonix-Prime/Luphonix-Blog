@@ -44,7 +44,7 @@ INSTALLED_APPS = [
     'wagtail.contrib.forms',
     'wagtail.contrib.redirects',
     'wagtail.embeds',
-    # 'wagtail.sites',  # Remove this if it exists
+    'wagtail.sites',  # Remove this if it exists
     'wagtail.users',
     'wagtail.snippets',
     'wagtail.documents',
