@@ -113,11 +113,18 @@ def signup_view(request):
                         continue
 
             # Login the user
-            login(request, user)
-            messages.success(request, 'Account created successfully!')
-            return redirect('wagtail_serve', '')  # Redirect to homepage
-        else:
-            return render(request, 'registration/signup.html', {'form': form})
+            # Specify the backend
+            backend = 'django.contrib.auth.backends.ModelBackend'  # or your specific backend
+            user = authenticate(request, username=user.username, password=form.cleaned_data['password1'], backend=backend)
+
+            if user is not None:
+                login(request, user, backend=backend)
+                messages.success(request, 'Account created successfully!')
+                return redirect('wagtail_serve', '')  # Redirect to homepage
+            else:
+                form.add_error(None, 'Authentication failed')
+
+        return render(request, 'registration/signup.html', {'form': form})
     return render(request, 'registration/signup.html')
 
 def login_view(request):
